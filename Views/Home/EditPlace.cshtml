@@ -1,0 +1,175 @@
+﻿
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row" style="margin-top:50px;margin-bottom:30px;height:574.545px;">
+         <div class="col-md-8" style="height:100%;">
+                    <input id="pac-input" ng-model="searchPer" class="controls" type="text"
+                           placeholder="Enter a location" />
+
+                    <div my-map id="map" style="height:100%;width:100%"></div>
+
+
+
+
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjnXS8_1pFjIh47ioaWoJuoh9YUwQ4RMo&signed_in=true&libraries=places" async defer></script>
+
+         </div>
+        @*<div class="col-md-4">
+            <h2>Heading</h2>
+            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+            <p><a class="btn btn-default" href="http://getbootstrap.com/examples/jumbotron/#" role="button">View details »</a></p>
+        </div>*@
+        <div class="col-md-4" style="height:100%;">
+            
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h4>Reviews</h4></div>
+                    <div class="panel-body" id="commentsDiv">
+
+                        <md-content ng-controller="myController" id="md-user-input" style="overflow-x:hidden">
+
+
+                        </md-content>
+                        <md-content ng-controller="myController" id="md-form-input" style="height:180px;overflow-x:hidden;overflow-y:hidden;">
+
+                        </md-content>
+                        <md-content id="md-title-comments">
+                            <button class="btn btn-large btn-block"><h5><i class="fa fa-comments"></i>Comments<i class="fa fa-comments"></i></h5></button>
+                        </md-content>
+                        <md-content id="animatedDiv" class="animatedDiv" ng-controller="myController"  style="height:100%;overflow-y:hidden">
+                           
+                            
+                        </md-content>
+
+                </div>
+            </div>
+
+
+         </div>
+    </div>
+
+
+@*<div class="row">
+        
+    <div id="test" class="col-md-8" style="height:400px;">
+        <nit-advanced-searchbox ng-model="searchParams"
+                                parameters="availableSearchParams"
+                                placeholder="Search...">
+        </nit-advanced-searchbox>
+        <div id='cse' style='width: 100%;'>Loading</div>
+<script src='//www.google.com/jsapi' type='text/javascript'></script>
+<script type='text/javascript'>
+                google.load('search', '1', {language: 'en', style: google.loader.themes.V2_DEFAULT});
+                google.setOnLoadCallback(function() {
+                  var customSearchOptions = {};
+                  var orderByOptions = {};
+                  orderByOptions['keys'] = [{label: 'Relevance', key: ''} , {label: 'Date', key: 'date'}];
+                  customSearchOptions['enableOrderBy'] = true;
+                  customSearchOptions['orderByOptions'] = orderByOptions;
+                  customSearchOptions['overlayResults'] = true;
+                  var customSearchControl =   new google.search.CustomSearchControl('004165467055254195886:mwepa0xuln4', customSearchOptions);
+                  customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+                  var options = new google.search.DrawOptions();
+                  options.setAutoComplete(true);
+                  customSearchControl.draw('cse', options);
+                }, true);
+</script>
+        
+        <gcse:search></gcse:search>
+        
+</div>
+
+
+    <div id="test"></div>*@
+
+    
+@*</div>*@
+
+
+<div class="row">
+    <div class="col-md-4" style="height:400px;">
+        
+
+       
+
+        <div class="panel panel-default" style="margin-left:10px;" id="userFormPanel">
+            <div class="panel-heading"><h4>Add New Services/Products</h4></div>
+            <div class="panel-body">
+                <form name="userFormNewService" >
+                    <p class="form-group">
+                        <label>Service/Product Name:</label>
+                        <input type="text" name="name" class="form-control" ng-model="serviceName" required />
+                        <span style="background-color:brown; width:250px" ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Service/Product name is required.</span>
+                    </p>
+                    <p class="form-group">
+                        <label>Rate:</label>
+                        <div style="height:20px;">
+
+                            <input-stars max="5" class="col-md-12" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="last_value"></input-stars>
+
+
+                        </div>
+                    </p>
+                    <p class="form-group">
+                        <label>Add Comment:</label>
+                        <textarea type="text" class="form-control" ng-model="userComment"></textarea>
+                    </p>
+                    <p class="form-group">
+
+                        <input type="submit" class=" btn btn-primary form-control" ng-model="userCommentSubmit" ng-click="submitForm()" value="Add" />
+                    </p>
+
+                </form>
+                </div>
+            </div>
+
+
+
+                <div id="commentPublish" style="width:30%;float:right;">
+
+                </div>
+            </div>
+            <div class="col-md-8" id="serviceCollection" style="height:100px;">
+          
+            </div>
+    </div>
+</div> <!-- /container --> 
+            @*</div>*@
+
+       @* </div>*@
+
+        <hr>
+        @*<footer>
+            <p>© 2016 Smart Aspects, BD Inc.</p>
+        </footer>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

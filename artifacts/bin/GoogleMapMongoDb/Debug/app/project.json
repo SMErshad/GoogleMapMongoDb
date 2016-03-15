@@ -1,0 +1,44 @@
+{
+  "webroot": "wwwroot",
+  "userSecretsId": "aspnet5-GoogleMapMongoDb-14a0598b-8994-40d6-b8ce-f25cef8738f9",
+  "version": "1.0.0-*",
+  "dependencies": {
+    "GoogleMapMongoDb": "1.0.0"
+  },
+  "commands": {
+    "web": "Microsoft.AspNet.Hosting --config hosting.ini",
+    "ef": "EntityFramework.Commands",
+    "kestrel": "Microsoft.AspNet.Hosting --config hosting.ini",
+    "gen": "Microsoft.Framework.CodeGeneration"
+  },
+  "frameworks": {
+    "dnx451": {
+      "dependencies": {},
+      "frameworkAssemblies": {
+        "System.Web": "4.0.0.0"
+      }
+    }
+  },
+  "exclude": [
+    "wwwroot",
+    "node_modules",
+    "bower_components"
+  ],
+  "publishExclude": [
+    "node_modules",
+    "bower_components",
+    "**.xproj",
+    "**.user",
+    "**.vspscc"
+  ],
+  "scripts": {
+    "prepublish": [
+      "npm install",
+      "bower install",
+      "gulp clean",
+      "gulp min"
+    ]
+  },
+  "entryPoint": "GoogleMapMongoDb",
+  "loadable": false
+}
