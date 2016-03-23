@@ -1,0 +1,190 @@
+﻿
+<div class="container" ng-controller="myController">
+    <!-- Example row of columns -->
+    <div class="row" style="margin-top:50px;margin-bottom:30px;height:574.545px;">
+         <div id="searchGlobal"   class="col-md-8" style="height:100%;">
+             @*ng-model-options="{updateOn:'blur click mousemove', debounce:500}"*@
+             @*<form ng-submit="submitSearch()" name="mapform">*@
+                <input id="pac-input" name="pac-input" ng-model="search.val" class="controls" type="search" placeholder="Enter a location"/>
+                
+             @*</form>*@
+                    <div my-map id="map" style="height:100%;width:100%"></div>
+             
+
+
+
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjnXS8_1pFjIh47ioaWoJuoh9YUwQ4RMo&signed_in=true&libraries=places" async defer></script>
+             
+         </div>
+        
+
+
+
+
+
+
+
+        <div class="col-md-4" style="height:100%;">
+            
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h4>Reviews</h4></div>
+                    <div class="panel-body" id="commentsDiv">
+
+                        <md-content ng-controller="myController" id="md-user-input" style="overflow-x:hidden">
+
+
+                        </md-content>
+                        <md-content ng-controller="myController" id="md-form-input" style="height:100px;overflow-x:hidden;">
+
+                        </md-content>
+                        <md-content ng-controller="myController" id="commentPublish" style="height:100px;overflow-x:hidden;">
+
+                        </md-content>
+                        <md-content id="md-title-comments">
+                            <button class="btn btn-large btn-block" disabled><h5><i class="fa fa-comments"></i>Comments<i class="fa fa-comments"></i></h5></button>
+                        </md-content>
+                        <md-content id="animatedDiv" class="animatedDiv" ng-controller="myController"  style="height:100%;overflow-y:hidden">
+                           
+                            
+                        </md-content>
+
+                </div>
+            </div>
+
+
+         </div>
+    </div>
+
+
+
+    <div class="row">
+    
+        <div class="col-md-4" style="height:400px;">
+        
+
+            <div class="panel panel-default" style="margin-left:10px;" id="userFormPanel">
+                <div class="panel-heading"><h4>Add New Services/Products</h4></div>
+                <div class="panel-body">
+                    <form ng-controller="myController" ng-submit="submit()">
+                        <p class="form-group">
+                            <label>Service/Product Name:</label>
+                            <input type="text" name="name" class="form-control" ng-model="serviceName" required />
+                            <span style="background-color:brown; width:250px" ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Service/Product name is required.</span>
+                        </p>
+                        <p class="form-group">
+                            <label>Rate:</label>
+                            <div style="height:20px;">
+
+                                <input-stars max="5" class="col-md-12" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="last_value"></input-stars>
+
+
+                            </div>
+                        </p>
+                        <p class="form-group">
+                            <label>Add Comment:</label>
+                            <textarea type="text" class="form-control" ng-model="userComment"></textarea>
+                        </p>
+                        <p class="form-group">
+
+                            <input type="submit" class=" btn btn-primary form-control"  value="Add" />
+                        </p>
+
+                    </form>
+                    </div>
+                </div>
+
+            </div>
+
+        <div class="col-md-8" id="serviceCollection" style="height:100px;">
+
+        </div>
+        
+           
+        
+    
+            
+
+        </div>
+        <div class="row">
+            @*ng-if="mapform.pac-input.$touched"*@
+            <div id="searchGlobal" ng-controller="myController" class="col-md-8 search" style="height:200px;">
+                <div style="height:100%;" ng-repeat="entity in entities | filter:search.val">
+                    <br>
+                    <br><p style="height:150px;"><code>PlaceId: {{entity.PlaceId}} | Name: {{entity.Name}} | Rating: {{entity.Rating}} | Comments: {{entity.Comments}}</code></p><br>
+                    <br>
+                </div>
+            </div>
+            <div class="col-md-4" id="userCreatedEntry">
+
+            </div>
+        </div>
+
+    <div class="row">
+        @*Modal Start*@
+
+        <div ng-controller="ModalDemoCtrl" class="col-md-6" style="height:100%;">
+            <script type="text/ng-template" id="myModalContent.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">I'm a modal!</h3>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li ng-repeat="item in items">
+                            <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                        </li>
+                    </ul>
+                    Selected: <b>{{ selected.item }}</b>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+
+            @*<button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
+                <button type="button" class="btn btn-default" ng-click="open('lg')">Large modal</button>*@
+            <button type="button" class="btn btn-default" ng-click="open('sm')">Small modal</button>
+            @*<button type="button" class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button>*@
+            <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+        </div>
+
+        @*Modal End*@
+    </div>
+</div> <!-- /container --> 
+            
+
+
+        <hr>
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
