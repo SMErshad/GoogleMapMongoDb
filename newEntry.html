@@ -1,0 +1,48 @@
+﻿<div class="searchLocal col-md-12" style="height:450px">
+    <div class="panel panel-success" >
+        <div class="panel-heading searchLocal" role="tab" id="headingA">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseA" aria-expanded="true" aria-controls="collapseA">
+                    Add {{searchMap}}
+                </a>
+            </h4>
+        </div>
+        <div id="collapseA" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingA">
+            <div class="panel-body" id="commentPublishNewCreation" >
+                <!--<p class="col-md-5" ng-bind-html="serviceDetails" id="service-details" style="height:80px;"></p>-->
+                <!--<span class="col-md-7 serviceRating" style="height:50px;float:right;"></span>-->
+                <!--<div style="height:30px;float:right;"><p><a id="openFormNewCreation" ng-href="#commentPublishPanelDiv" ng-click="openFormOld()"><font color="green"><i class="fa fa-comment-o"></i> Add a Comment</font></a></p></div>-->
+
+                <div  class="col-md-12 searchLocal">
+                    <form ng-controller="myController" ng-submit="userCreatedSubmit()" name="userNewCreationForm">
+                            <p>Would you like to add a new company?</p>
+
+                            <p class="form-group">
+                                <label>Name:</label>
+
+                                <input ng-controller="myController" type="text" ng-model="newCompanyName" placeholder="{{search.val}}">
+                            </p>
+
+                            <p class="form-group">
+                                <label>Review:</label>
+
+                                <input-stars style="margin-top:20px;" max="5" class="col-md-12" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="userCreatedValue"></input-stars>
+                            </p>
+
+                            <p class="form-group">
+                                <label>Comment:</label>
+                                <textarea type="text" class="form-control" ng-model="userCreatedComment"></textarea>
+                            </p>
+
+                            <p class="form-group">
+                                <input type="submit" style="margin-top:30px;margin-bottom:30px;" class=" btn btn-primary form-control"  value="Save" />
+                            </p>
+
+                        
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
