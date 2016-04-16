@@ -6,9 +6,14 @@
             //element.bind("mouseenter", function () {
             //    //scope.globe.start();
             //})
+            //scope.$apply(function () {
+                scope.$eval(attrs.myMap);
+
+            //});
 
             var map, infoWindow;
             var markers = [];
+            $rootScope.flag1 = false;
             //var company = "";
             //$rootScope.company = company;
         
@@ -28,22 +33,32 @@
                 });
 
                 var input = document.getElementById('pac-input');
-
-                var autocomplete = new google.maps.places.Autocomplete(input);
+                //scope.$apply(function () {
+                    var autocomplete = new google.maps.places.Autocomplete(input);
+                //});
+                
                 autocomplete.bindTo('bounds', map);
 
                 map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-                var infowindow = new google.maps.InfoWindow();
-                var marker;
+                scope.infowindow = new google.maps.InfoWindow();
+                scope.marker = null;
 
 
                 //marker.addListener('click', function() {
                 //  infowindow.open(map, marker);
                 //});
-
+                //$rootScope.$apply(function () {
+                //    $rootScope.flag = false;
+                //});
+                //angular.element("#pac-input").on('click', function () {
+                    //$rootScope.flag1 = false;
+                //});
+                
                 autocomplete.addListener('place_changed', function () {
-                    infowindow.close();
+                    //flag = true;
+                    $rootScope.flag1 = true;
+                    scope.infowindow.close();
                     var place = autocomplete.getPlace();
                     if (!place.geometry) {
                         return;
@@ -56,31 +71,33 @@
                         map.setZoom(13);
                     }
 
+                    //scope.$apply(function () {
+                        scope.marker = new google.maps.Marker({
+                            map: map,
+                            // Define the place with a location, and a query string.
 
-                    marker = new google.maps.Marker({
-                        map: map,
-                        // Define the place with a location, and a query string.
-
-                        // Attributions help users find your site again.
-                        attribution: {
-                            source: 'Google Maps JavaScript API',
-                            webUrl: 'https://developers.google.com/maps/'
-                        }
-                        //draggable: true,
-                        //animation: google.maps.Animation.DROP
-                    });
-
-
-                    // Set the position of the marker using the place ID and location.
-                    marker.setPlace({
-                        placeId: place.place_id,
-                        location: place.geometry.location
-                    });
-
-                    marker.setVisible(true);
+                            // Attributions help users find your site again.
+                            attribution: {
+                                source: 'Google Maps JavaScript API',
+                                webUrl: 'https://developers.google.com/maps/'
+                            }
+                            //draggable: true,
+                            //animation: google.maps.Animation.DROP
+                        });
+                    
 
 
-                    google.maps.event.addListener(marker, 'click', function () {
+                        // Set the position of the marker using the place ID and location.
+                        scope.marker.setPlace({
+                            placeId: place.place_id,
+                            location: place.geometry.location
+                        });
+
+                        
+                    
+                    scope.marker.setVisible(true);
+
+                    google.maps.event.addListener(scope.marker, 'click', function () {
                         htmlBoth = '<br>';
 
                         var placeID = place.place_id;
@@ -138,28 +155,33 @@
                        };
 
 
-                       infowindow.setContent('<div id="iw-container" class=""><strong>' + place.name + '</strong><br>' +
+                       scope.infowindow.setContent('<div id="iw-container" class=""><strong>' + place.name + '</strong><br>' +
                       'Place ID: ' + place.place_id + '<br>' +
                       place.formatted_address + '<br><br></div>');
 
 
-                       infowindow.open(map, marker);
+                       scope.infowindow.open(map, scope.marker);
                         //$rootScope.company = company;
                        
 
-                        var elem = angular.element(document.querySelector('[ng-app=myApp]'));
-                        var injector = elem.injector();
-                        var $rootScope = injector.get('$rootScope');
+                        //var elem = angular.element(document.querySelector('[ng-app=myApp]'));
+                        //var injector = elem.injector();
+                        //var $rootScope = injector.get('$rootScope');
+                       var elem = angular.element(document.querySelector('[ng-app=myApp]'));
+                       var injector = elem.injector();
+                       var $rootScope = injector.get('$rootScope');
 
                         $rootScope.$apply(function () {
                             $rootScope.company = company;
                             $rootScope.place = place;
-                            $rootScope.Name = Name; 
+                            $rootScope.Name = Name;
+                            $rootScope.flag1 = true;
+                            $rootScope.infowindow = scope.infowindow;
                         });
 
 
                         scope.globe.start();
-
+                        
 
                         //$('#md-user-input').html("");
                         //$("#md-comments").html("");
@@ -357,7 +379,9 @@
             //}
         
             // show the map and place some markers
+            
             initMap();
+            //$rootScope.flag1 = false;
         
             //setMarker(map, new google.maps.LatLng(51.508515, -0.125487), 'London', 'Just some content');
             //setMarker(map, new google.maps.LatLng(52.370216, 4.895168), 'Amsterdam', 'More content');
@@ -367,6 +391,7 @@
         return {
             restrict: 'EAC',
             template: '',
+            scope: true,
             replace: true,
             link: link
         };
