@@ -1,64 +1,195 @@
-﻿    myApp
-    .controller('myController', ['$scope', '$compile', 'dataFactory', '$http','$rootScope','$element',
-        function ($scope, $compile, dataFactory, $http, $rootScope, $element) {
+﻿myApp
+.controller('myController', ['$scope', '$compile', 'dataFactory', '$http', '$rootScope', '$element','$q', '$uibModal',
+function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibModal) {
 
-            var company = $rootScope.company;
-            var place = $rootScope.place;
-           
-
-            var self = this;
-
-            $scope.animateElementIn = function ($el) {
-                $el.removeClass('hidden');
-                $el.addClass('animated ' + 'fadeInDown');
-            };
-
-            $scope.animateElementOut = function ($el) {
-                $el.addClass('hidden');
-                $el.removeClass('animated ' + 'fadeInDown');
-            };
+    var company = $rootScope.company;
+    var place = $rootScope.place;
+    $scope.entities = [];
 
 
-            
+    var self = this;
+
+    $scope.animateElementIn = function ($el) {
+        $el.removeClass('hidden');
+        $el.addClass('animated ' + 'fadeInDown');
+    };
+
+    $scope.animateElementOut = function ($el) {
+        $el.addClass('hidden');
+        $el.removeClass('animated ' + 'fadeInDown');
+    };
+
+
+    ///********modal directive starts here*********************//
+    //$scope.items = ['item1', 'item2', 'item3'];
+
+    $scope.animationsEnabled = true;
+
+    $scope.open = function (size) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            template: '<div modal-directive class="col-md-12" style="height:500px"></div>',
+            $scope:true,
+            controller: 'ModalInstanceCtrl',
+            //    function ($scope, $modalInstance) {
+               
+            //        $scope.ok = function () {
+            //            $modalInstance.close();
+            //        };
+                
+               
+            //        $scope.cancel = function () {
+            //            $modalInstance.dismiss('cancel');
+            //        };
+                
+            //},
+
+            //    //var el = angular.element.find('new-entry');
+            //    //$compile(el)($scope);
+
+            //    $scope.ok = function () {
+            //        $modalInstance.close();
+            //    };
+
+            //    $scope.cancel = function () {
+            //        $modalInstance.dismiss('cancel');
+            //    };
+            //},
+            size: size,
+            resolve: {
+                //items: function () {
+                //    return $scope.items;
+                //}
+            }
+        });
+
+        modalInstance.result.then(function () {
+            //$scope.selected = selectedItem;
+        }, function () {
+            //$log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    $scope.toggleAnimation = function () {
+        $scope.animationsEnabled = !$scope.animationsEnabled;
+    };
+
+    //self.ok = function () {
+    //     $modalInstance.close();
+    // };
+
+    // self.cancel = function () {
+    //      $modalInstance.dismiss('cancel');
+    // };
+
+    //modalInstance.result.then(function (selectedItem) {
+    //    $scope.selected = selectedItem;
+    //}, function () {
+    //    //$log.info('Modal dismissed at: ' + new Date());
+    //});
+
+
+
+            ///********modal directive ends here*********************//
+
+
+
 
             var localSearch = function (query) {
-                dataFactory.searchLocal(query)
-                      .then(function (data, status, headers, config, statusText) {
-                          //data = $.parseJSON(data);
-                          //var responseData = data.data;
-                          console.log(data.data);
-                          var response = data.data;
-                          console.log(response);
-                          response = angular.fromJson(response);
-                          var companyCreate = [];
-                          if (typeof response[0] == 'undefined' || response[0] == null)
-                          {
-                              var newAnimatedDirective = angular.element('<div  ng-controller="myController" style="height:100%;"  id="mdCommentsAnimated"><div ng-repeat="car in companyCreate" bind-scroll-to=".animatedDiv" when-visible="animateElementIn"    class="car-container" style="height:120px;"><div class="car panel-body" id="commentPublish" style="height:100px;"><i class="fa fa-quote-left" style="color:green"></i>{{car}}<i class="fa fa-quote-right" style="color:green"></i></div></div></div>');
-                              var element = $("#animatedDiv").prepend(newAnimatedDirective);
-                              $compile(newAnimatedDirective)($scope);
+                //var deferred = $q.defer();
+                //var promise = deferred.promise;
 
+                Object.prototype.isNullOrEmpty = function (value) {
+                    return (!value);
+                }
 
-                              newUserCreatedDirective = angular.element('<new-entry ng-controller="myController" style="height:300px;width:100%"></new-entry>');
-                              var element = $("#userCreatedEntry").append(newUserCreatedDirective);
+                
+                    
+                        //var query = result;
+                        dataFactory.searchLocal(query)
+                         .then(function (data, status, headers, config, statusText) {
+                             //data = $.parseJSON(data);
+                           if (data.data[0] != null && data.data[1] != null)
+                             var responseData = angular.fromJson(data.data);
+                             var container = document.getElementsByClassName('pac-container');
+                           
+                             //if (!($rootScope.flag1 == true && responseData[0] == null && responseData[1] == null && (angular.element("#pac-input").text() != null)) || !($rootScope.flag1 == false && responseData[0] == null && responseData[1] == null && (angular.element("#pac-input").text() != null) && angular.element('body div .pac-container').css('display') == 'none')) {
+                             if (responseData[0] == null && responseData[1] == null) {
+                             //var x = 0;
+                                     //var deferred = $q.defer();
+                                     //if (responseData) {
+                                     //    deferred.resolve(responseData);
+                                     //} else {
+                                     //    deferred.reject("Wait, there are something wrong with the directive.");
+                                     //};
 
+                                     //var promise = deferred.promise;
 
-                              $compile(newUserCreatedDirective)($scope);
-                          }
-                          $scope.entities = [];
-                          angular.forEach(response, function (item) {
-                              $scope.entities.push(item);
-                              console.log(item);
-                          });
+                                     //promise.then(function (template) {
+                                     //    x++;
+                                     //    if (x == 1) {
+                                     //        //alert("ghfghfghf");
+                                     //    }
+                                     //}, function (reason) {
+                                     //    $element.text("Fail (" + reason + ")");
+                                     //    console.log("Failed promise.");
+                                     //});
+                                     //$scope.$watch($element, function (val) {
+                                     //    $scope.$eval(val);
+                                     //});
+                                     //promise.then(function (x) {
+                                     //setTimeout(function () {
+                                     //$scope.$apply(function () {
+                                     $scope.open('lg');
+                                     //});
+                                     //}, 1000);
 
-                      });
+                                     //}
+                                     //});
+                                 
+                             }
+                             //else {
+                             //    console.log(data.data);
+                             //    //var response = data.data;
+                             //    ////console.log(response);
+                             //    //response = angular.fromJson(response);
+                             //    //var companyCreate = [];
+                             //    //var deferred = $q.defer();
+                             //    //var promise = deferred.promise;
+
+                             //    if (responseData[0] != null && responseData[1] != null) {
+                             //        angular.forEach(responseData, function (item) {
+                             //            item = angular.fromJson(item);
+                             //            $scope.entities.push(item);
+
+                             //            console.log(item);
+                             //        });
+                             //    }
+                             //    //angular.element("#localFound").html($scope.entities);
+                             //}
+                         });
+                    
+                    
+                
             };
+            //$scope.searchMap = angular.element("#pac-input").attr("ng-model");
 
-            angular.element("#pac-input").bind('blur', function () {
-                var query = angular.element("#pac-input").val();
-                localSearch(query);
-                //console.log($scope.entities);
-            });
+            //angular.element("#pac-input").bind('blur', function (event) {
+            //    //event.preventDefault();
+            //    var query = document.getElementById("pac-input").value.toString();
+            //    localSearch(query);
+            //    //console.log($scope.entities);
+            //});
+
             
+
+
+
+
+
+
+
 
             self.start = function () {
 
@@ -96,7 +227,7 @@
                             var element = $compile(newUserFormAnimatedDirective)($scope);
                             angular.element("#md-form-input").append(element);
                         });
-                        
+
                         $.ajax({
                             type: "POST",
                             url: "../Home/UserRatingSave",
@@ -171,7 +302,7 @@
 
                                    //$("#md-comments").html(htmlBoth);
                                }
-                              
+
                            })
                         .then(function () {
                             dataFactory.savePlace(company)
@@ -279,9 +410,9 @@
                         $scope.ourComments.reverse();
                         //$scope.ourComments.push;
 
-                        
+
                         $scope.ourComments.push(review);
-                       
+
                         $scope.ourComments.reverse();
                         var arr = [];
 
@@ -298,7 +429,7 @@
                         //angular.element("#animatedDiv").prepend(ourReviews);
                         console.log(ourReviews);
 
-                            
+
 
                     }
                 });
@@ -412,117 +543,227 @@
 
 
 
-                $scope.submit = function () {
-                    //$("#userFormPanel").hide();
-                    var company = $rootScope.company;
+            $scope.submit = function () {
+                //$("#userFormPanel").hide();
+                var company = $rootScope.company;
 
-                    var PlaceID = company.PlaceId;
+                var PlaceID = company.PlaceId;
 
-                    var reviews = [];
-                    var CommentsArray = [];
-                    var Rating = parseFloat(company.Rating);
-                    var userRating = '';
-                    //alert(score);
+                var reviews = [];
+                var CommentsArray = [];
+                var Rating = parseFloat(company.Rating);
+                var userRating = '';
+                //alert(score);
 
-                    var Name = company.Name;
-                    var Address = company.formatted_address;
+                var Name = company.Name;
+                var Address = company.formatted_address;
 
-                    //var serviceComments = company.Services;
+                //var serviceComments = company.Services;
 
-                    //serviceComments.push($scope.userComment);
+                //serviceComments.push($scope.userComment);
 
-                    var Product = function Product() {
-                        this.Id = 1;
-                        this.Name = "KFC";
-                        this.Rating = 4.3;
-                        this.Comments = ["hgtyftyfyft", "hgddjfghgf"];
-                    };
-                    var Product = new Product();
+                var Product = function Product() {
+                    this.Id = 1;
+                    this.Name = "KFC";
+                    this.Rating = 4.3;
+                    this.Comments = ["hgtyftyfyft", "hgddjfghgf"];
+                };
+                var Product = new Product();
 
-                    var Service = function Service() {
-                        //this.Id = 1;
-                        //this.Name = "KFC";
-                        this.Type = "Food";
-                        this.Description = "Burger";
-                        this.serviceRating = [];
-                        this.serviceComments = [];
-                        this.Name = $scope.serviceName;
-                        //this.serviceRating = company.Services;
-                        this.serviceRating.push($scope.last_value);
-                        this.serviceComments.push($scope.userComment);
-                    };
-
-                    var Service = new Service();
-                    var Services = company.Services;
-                    Services.push(Service);
-
-                    //var obje = function Comment() {
-                    //    this.Author = "X";
-                    //    this.Text = "very Nice";
-                    //};
-
-
-                    //var Comment = new obje();
-
-
-
-                    company = {
-                        "PlaceId": PlaceID, "Name": Name, "Rating": Rating, "Comments": ["", "", "", "", ""], "UsersComments": [5], "Department": null, "Product": Product, "Services": Services
-                    };
-
-                    $rootScope.company = company;
-
-
-
-                    if (company != null) {
-                        dataFactory.serviceProduct(company)
-                            .then(function (data) {
-                                //$scope.places = data;
-                                console.log(data);
-                                data = $.parseJSON(data.data);
-                                services = data.Services;
-
-                                $scope.services = services;
-                                var keyIterate = 0;
-                                var serviceIterate = '';
-
-                                //$scope.panelValue.length = 0;
-                                //$scope.panelService.length = 0;
-                                //var panelVal = Math.max($scope.panelValue);
-
-                                angular.forEach(services, function (service, key) {
-
-                                    keyIterate = key;
-                                    serviceIterate = service;
-
-                                });
-
-                                //$rootScope.i = 0;
-                                //var panelIterator = 
-
-                                $scope.panelValue.push($rootScope.i);
-                                //$scope.panelVal = $scope.panelValue[$rootScope.i];
-                                $scope.panelService.push(serviceIterate);
-                                var newDirective = angular.element('<div service-product ng-controller="myController" style="height:200px;"></div>');
-                                var element = $("#serviceCollection").prepend(newDirective);
-                                $compile(newDirective)($scope);
-
-
-                            }),
-                        function (error) {
-                            //$scope.status = 'Unable to load place data: ' + error.message;
-                        };
-
-                    }
+                var Service = function Service() {
+                    //this.Id = 1;
+                    //this.Name = "KFC";
+                    this.Type = "Food";
+                    this.Description = "Burger";
+                    this.serviceRating = [];
+                    this.serviceComments = [];
+                    this.Name = $scope.serviceName;
+                    //this.serviceRating = company.Services;
+                    this.serviceRating.push($scope.last_value);
+                    this.serviceComments.push($scope.userComment);
                 };
 
+                var Service = new Service();
+                var Services = company.Services;
+                Services.push(Service);
+
+                //var obje = function Comment() {
+                //    this.Author = "X";
+                //    this.Text = "very Nice";
+                //};
 
 
+                //var Comment = new obje();
+
+
+
+                company = {
+                    "PlaceId": PlaceID, "Name": Name, "Rating": Rating, "Comments": ["", "", "", "", ""], "UsersComments": [5], "Department": null, "Product": Product, "Services": Services
+                };
+
+                $rootScope.company = company;
+
+
+
+                if (company != null) {
+                    dataFactory.serviceProduct(company)
+                        .then(function (data) {
+                            //$scope.places = data;
+                            console.log(data);
+                            data = $.parseJSON(data.data);
+                            services = data.Services;
+
+                            $scope.services = services;
+                            var keyIterate = 0;
+                            var serviceIterate = '';
+
+                            //$scope.panelValue.length = 0;
+                            //$scope.panelService.length = 0;
+                            //var panelVal = Math.max($scope.panelValue);
+
+                            angular.forEach(services, function (service, key) {
+
+                                keyIterate = key;
+                                serviceIterate = service;
+
+                            });
+
+                            //$rootScope.i = 0;
+                            //var panelIterator = 
+
+                            $scope.panelValue.push($rootScope.i);
+                            //$scope.panelVal = $scope.panelValue[$rootScope.i];
+                            $scope.panelService.push(serviceIterate);
+                            var newDirective = angular.element('<div service-product ng-controller="myController" style="height:200px;"></div>');
+                            var element = $("#serviceCollection").prepend(newDirective);
+                            $compile(newDirective)($scope);
+
+
+                        }),
+                    function (error) {
+                        //$scope.status = 'Unable to load place data: ' + error.message;
+                    };
+
+                }
+            };
+
+            //var element = document.querySelector('[ng-form]');
+            $scope.submitSearch = function (query) {
+                //alert("ghfghfhfghfjfgfdfjghghf");
+                localSearch(query);
+            };
+            //angular.element('#pac-input').blur( function (event) {
+
+
+
+            //   //var handle = function( event ) {
+            //   //     var ret,
+            //   //             target = this,
+            //   //             related = event.relatedTarget,
+            //   //             handleObj = event.handleObj;
+            //   //     // For mousenter/leave call the handler if related is outside the target.
+            //   //     // NB: No relatedTarget if the mouse left/entered the browser window
+            //   //     //if ( !related || (related !== target && !jQuery.contains( target, related )) ) {
+            //   //         event.type = handleObj.origType;
+            //   //         ret = handleObj.handler.apply( this, arguments );
+            //   //         //event.type = fix;
+            //   //     //}
+            //   //     return ret;
+            //   // }
+
+
+            //   //var y = 0;
+            //   //if (event.which === 13) {
+            //       //handle(event);
+                   
+            //       //var handleObj = event.handleObj;
+            //       //event.type = handleObj.origType;
+            //       //handleObj.handler.apply(this);
+            //       //y++;
+
+            //       //if(y == 1)
+            //            var query = angular.element("#pac-input").val().toString();
+            //       //$scope.$apply(function () {
+                        
+                            
+            //            //});
+                        
+                        
+
+            //   //}
+            //        $scope.submitSearch(query);
+            //    });
+            $scope.userCreatedSubmit = function () {
+                
+                    var formElements = angular.element();
+                    //company.push(formElements);
+                    
+                    var companyName = $scope.newCompanyName;
+                    //company.Name = companyName;
+                    var companyRating = $scope.userCreatedValue;
+                    //company.Rating = companyRating;
+                    var companyComment = $scope.userCreatedComment;
+                   
+                    var company = {
+                        "PlaceId": null, "Name": companyName, "Rating": companyRating, "Comments": ["", "", "", "", ""], "UsersComments": [5], "Department": null, "Product": null, "Services": null
+                    };
+                    company.Comments.push(companyComment);
+
+                    dataFactory.userCreatedCompany(company)
+                        .then(function (data) {
+                            //$scope.places = data;
+                            console.log(data);
+                            data = $.parseJSON(data.data);
+                            ////services = data.Services;
+
+                            $scope.newCompany = data;
+                            angular.element('#newCompany').html($scope.newCompany);
+                            //var keyIterate = 0;
+                            //var serviceIterate = '';
+
+                            //$scope.panelValue.length = 0;
+                            //$scope.panelService.length = 0;
+                            //var panelVal = Math.max($scope.panelValue);
+
+                            //angular.forEach(services, function (service, key) {
+
+                            //    keyIterate = key;
+                            //    serviceIterate = service;
+
+                            //});
+
+                            ////$rootScope.i = 0;
+                            ////var panelIterator = 
+
+                            //$scope.panelValue.push($rootScope.i);
+                            ////$scope.panelVal = $scope.panelValue[$rootScope.i];
+                            //$scope.panelService.push(serviceIterate);
+                            //var newDirective = angular.element('<div service-product ng-controller="myController" style="height:200px;"></div>');
+                            //var element = $("#serviceCollection").prepend(newDirective);
+                            //$compile(newDirective)($scope);
+
+
+                        }),
+                    function (error) {
+                        //$scope.status = 'Unable to load place data: ' + error.message;
+                    };
+                };
+            
 
             
+                
+                
+
+            
+            
+
+
+
+
         }
+    
             
-        ]);
+     ]);
 
 
 

@@ -1,15 +1,16 @@
-﻿myApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+﻿myApp.controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
-  $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };
+  //$scope.items = items;
+  //$scope.selected = {
+  //  item: $scope.items[0]
+    //};
+    var self = this;
 
   $scope.ok = function () {
-    $uibModalInstance.close($scope.selected.item);
+      //$uibModalInstance.close();
   };
 
   $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
+      $uibModalInstance.dismiss('cancel');
   };
-});
+}]);
