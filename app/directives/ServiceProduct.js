@@ -13,7 +13,7 @@ myApp
                         var i = $rootScope.i;
 
                         scope.panelVal = scope.panelValue[i];
-                        var service = scope.panelService[i];
+                        scope.service = scope.panelService[i];
                         var template = angular.element(html);
                         // Append it to the directive element
                         element.append(template);
@@ -24,9 +24,9 @@ myApp
                         //scope.i = i;
                
                         //$("#service-details").append('<strong>Service/Product:</strong> ' + scope.service.Name + '<br>' + '<i class="fa fa-commenting"></i> ' + scope.service.serviceComments + '</br></br>');
-                        scope.serviceDetails = '<strong>Service/Product:</strong> ' + service.Name + '<br>' + '<i class="fa fa-commenting"></i> ' + service.serviceComments + '</br></br>';
+                        scope.serviceDetails = '<strong>Service/Product:</strong> ' + scope.service.Name + '<br>' + '<i class="fa fa-commenting"></i> ' + scope.service.serviceComments + '</br></br>';
                
-                        scope.last_value = service.serviceRating;
+                        scope.last_value = scope.service.serviceRating;
                         var starDirective = angular.element('<input-stars max="5" class="col-md-12" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="last_value" ></input-stars>');
                         angular.element(".serviceRating").append(starDirective);
                         //var stars = '<input-stars max="5" class="col-md-12" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="scope.last_value"></input-stars>';

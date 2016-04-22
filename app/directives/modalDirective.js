@@ -10,6 +10,7 @@
             $templateRequest('../modalDirective.html').then(function (html) {
 
                 var template = angular.element(html);
+
                 // Append it to the directive element
 
                 //var innerTemplate = angular.element(html).find('new-entry');
@@ -31,6 +32,14 @@
                 //    });
                     $element.append(template);
                     $scope.$eval($attrs.modalDirective);
+                //$scope.$apply(function () {
+                    $scope.searchMap = angular.element('#pac-input').val();
+                        //$scope.$eval($scope.searchMap);
+                    //});
+                    //$scope.$watch('searchMap', function (tmpStr) {
+                    //    $scope.searchMap = tmpStr;
+                    //});
+                    //$scope.$eval($attrs.searchMap);
                     
                     $compile(template)($scope);
                 //}, function (reason) {
@@ -66,7 +75,7 @@
             //template: '<ng-include src="getTemplate()"></ng-include>',
             template: '',
             //transclude: 'element',
-            //replace: true,
+            replace: true,
             //transclude: true,
             controller: 'myController',
             link: link

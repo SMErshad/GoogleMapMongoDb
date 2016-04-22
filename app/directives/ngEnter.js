@@ -25,7 +25,7 @@
                         timer = $timeout(function () {
 
                             if (tmpStr === scope.searchMap) {
-                                if ((angular.element(document.getElementsByClassName('pac-container')).css('display') == 'none' && $rootScope.flag1 == false) || $rootScope.infowindow) {
+                                if ((angular.element(document.getElementsByClassName('pac-container')).css('display') == 'none' && $rootScope.flag1 == false) || ($rootScope.infowindow && $rootScope.marker) || ($rootScope.marker && $rootScope.flag1 == true) ) {
                                     scope.submitSearch(scope.searchMap);
                                 }                                
                             }

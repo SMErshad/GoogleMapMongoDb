@@ -3,13 +3,7 @@
     // directive link function
         var link = function(scope, element, attrs) {
 
-            //element.bind("mouseenter", function () {
-            //    //scope.globe.start();
-            //})
-            //scope.$apply(function () {
-                scope.$eval(attrs.myMap);
-
-            //});
+            scope.$eval(attrs.myMap);
 
             var map, infoWindow;
             var markers = [];
@@ -44,17 +38,6 @@
                 scope.infowindow = new google.maps.InfoWindow();
                 scope.marker = null;
 
-
-                //marker.addListener('click', function() {
-                //  infowindow.open(map, marker);
-                //});
-                //$rootScope.$apply(function () {
-                //    $rootScope.flag = false;
-                //});
-                //angular.element("#pac-input").on('click', function () {
-                    //$rootScope.flag1 = false;
-                //});
-                
                 autocomplete.addListener('place_changed', function () {
                     //flag = true;
                     $rootScope.flag1 = true;
@@ -177,215 +160,21 @@
                             $rootScope.Name = Name;
                             $rootScope.flag1 = true;
                             $rootScope.infowindow = scope.infowindow;
+                            $rootScope.marker = scope.marker;
                         });
 
 
                         scope.globe.start();
-                        
-
-                        //$('#md-user-input').html("");
-                        //$("#md-comments").html("");
-
-                        //$('#md-user-input').prepend('<div id="iw-container" class=""><strong>' + place.name + '</strong><br>' +
-                        //                              'Place ID: ' + place.place_id + '<br>' + place.formatted_address + '<br><br>' + '<div id="jRateFinal" style="height:70px;width:350px;"class="jRate"></div><div id="block" style="height:200px;width:500px;" hidden>Would you like to put a comment as well?<br><form><textarea id="addComment" type></textarea><br><input type="submit" id="submitComment" value="Add a Comment"></form></div>');
-
-                        //$(".jRate").jRate({
-                        //    startColor: 'cyan',
-                        //    endColor: 'blue',
-                        //    rating: place.rating,
-                        //    onSet: function (score) {
-                        //        jRateScore = score;
-                        //        if (place.rating == null)
-                        //            userRating = parseFloat(jRateScore);
-                        //        else
-                        //            userRating = parseFloat((parseFloat(jRateScore) + parseFloat(place.rating)) / 2);
-                        //        //alert(score);
-                        //        $("#block").show();
-                        //        $("#block textarea").animate({
-                        //            width: "400%",
-                        //            opacity: 0.4,
-                        //            fontSize: "1em"
-                        //            //borderWidth: "10px"
-                        //        }, 7000);
-                        //        $("#submitComment").click(function (e) {
-                        //            e.preventDefault();
-                        //            addComment(placeID, $("#addComment").val());
-                        //            $("#block").hide();
-                        //        });
-
-
-                        //        $.ajax({
-                        //            type: "POST",
-                        //            url: "../Home/UserRatingSave",
-                        //            data: { PlaceID: placeID, UserRating: userRating },
-                        //            dataType: "json",
-
-                        //            success: function (dataa) {
-                        //                dataa = $.parseJSON(dataa);
-                        //                var responseRating = dataa.Rating;
-                        //                console.log(responseRating);
-
-                        //                document.getElementById('jRateFinal').innerHTML = "<br>";
-
-                        //                //if (responseRating == NaN) {
-                        //                $(".jRate").jRate({
-                        //                    startColor: 'cyan',
-                        //                    endColor: 'blue',
-                        //                    rating: responseRating,
-                        //                    readonly: true
-                        //                });
-
-
-                        //            }
-                        //        });
-
-                        //    }
-                        //});
-
-
-
-                        //$.ajax({
-                        //    type: "POST",
-                        //    url: "../Home/GoogleComments",
-                        //    data: { PlaceID: placeID },
-                        //    dataType: "json",
-
-                        //    success: function (dataJson) {
-
-
-                        //        console.log(dataJson);
-                        //        result = $.parseJSON(dataJson).result;
-                        //        reviews = result.reviews;
-                        //        //htmlBoth += "<div>";
-                        //        if (reviews != undefined) {
-                        //            $.each(reviews, function (index, item) {
-                        //                console.log("GoogleComment[" + index + "]: " + item);
-                        //                CommentsArray.push(item.text);
-                        //                //htmlBoth += "<br><strong>GoogleComment[" + index + "]:</strong> " + item.text + "<br>";
-
-                        //            });
-
-                        //            company.Comments = new Array();
-                        //            for (var i = 0; i < CommentsArray.length; i++) {
-
-                        //                company.Comments.push(CommentsArray[i]);
-
-                        //            };
-
-                        //            $("#md-comments").append(htmlBoth);
-                        //        }
-
-
-                        //        $.ajax({
-                        //            type: "POST",
-                        //            url: "../Home/SavePlace",
-                        //            data: JSON.stringify(company),
-                        //            contentType: "application/json",
-                        //            dataType: "json",
-                        //            traditional: true,
-
-                        //            success: function (response) {
-                        //                console.log(response);
-                        //                var result = $.parseJSON(response);
-                        //                var reviews = result.Comments;
-                        //                var ourReviews = result.UsersComments;
-                        //                //userComment = dataa.userComment;
-                        //                //htmlBoth += "<br><strong>Recent Comment: " + userComment + "</strong><br>";
-
-
-                        //                console.log(reviews);
-                        //                console.log(ourReviews);
-                        //                console.log(response);
-                        //                //result = $.parseJSON(response);
-
-                        //                //userComment = response.userComment;
-                        //                //htmlBoth += "<br><strong>Recent Comment: " + userComment + "</strong><br>";
-
-
-                        //                if (!($.isEmptyObject(ourReviews))) {
-                        //                    $.each(ourReviews, function (index, item) {
-                        //                        console.log("OurComment[" + index + "]: " + item);
-                        //                        CommentsArray.push(item);
-                        //                        htmlBoth += "<br><strong>OurComment[" + index + "]:</strong> " + item + "<br>";
-
-                        //                    });
-                        //                }
-                        //                if (!($.isEmptyObject(reviews))) {
-                        //                    $.each(reviews, function (index, item) {
-                        //                        console.log("GoogleComment[" + index + "]: " + item);
-                        //                        CommentsArray.push(item);
-                        //                        htmlBoth += "<br><strong>GoogleComment[" + index + "]:</strong> " + item + "<br>";
-
-                        //                    });
-                        //                }
-
-                        //                htmlBoth += "</br>";
-                        //                //var htmlOur = "<br>";
-
-                        //                $("#md-comments").append(htmlBoth);
-
-
-
-                        //                 }
-                        //        });
-
-
-
-                        //    },
-                        //    error: function (err) {
-                        //        console.log(err);
-                        //    }
-                        //});
-
-                       
-
-
-                       
-
+                         
                     });
                 });
             }
 
-
-            //scope.$on('initMap', function (event, data) {
-            //    scope.initMap();
-            //});
-        
-            // place a marker
-            //function setMarker(map, position, title, content) {
-            //    var marker;
-            //    var markerOptions = {
-            //        position: position,
-            //        map: map,
-            //        title: title,
-            //        icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
-            //    };
-
-            //    marker = new google.maps.Marker(markerOptions);
-            //    markers.push(marker); // add marker to array
-            
-            //    google.maps.event.addListener(marker, 'click', function () {
-            //        // close window if not undefined
-            //        if (infoWindow !== void 0) {
-            //            infoWindow.close();
-            //        }
-            //        // create new window
-            //        var infoWindowOptions = {
-            //            content: content
-            //        };
-            //        infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-            //        infoWindow.open(map, marker);
-            //    });
-            //}
         
             // show the map and place some markers
             
             initMap();
-            //$rootScope.flag1 = false;
-        
-            //setMarker(map, new google.maps.LatLng(51.508515, -0.125487), 'London', 'Just some content');
-            //setMarker(map, new google.maps.LatLng(52.370216, 4.895168), 'Amsterdam', 'More content');
-            //setMarker(map, new google.maps.LatLng(48.856614, 2.352222), 'Paris', 'Text here');
+            
         };
     
         return {
