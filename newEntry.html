@@ -1,10 +1,11 @@
-﻿<div class="searchLocal col-md-12" style="height:450px">
-    <div class="panel panel-success" >
-        <div class="panel-heading searchLocal" role="tab" id="headingA">
+﻿<div class="col-md-12" style="height:450px">
+    <div class="panel panel-success" id="modalpanel" >
+        <div class="panel-heading" role="tab" id="headingA">
             <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseA" aria-expanded="true" aria-controls="collapseA">
-                    Add {{searchMap}}
+                    Add<span>"{{searchMap}}"</span>                   
                 </a>
+                <span ng-click="cancel()" remove-modal style="float:right">X</span>                                                     
             </h4>
         </div>
         <div id="collapseA" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingA">
@@ -13,34 +14,37 @@
                 <!--<span class="col-md-7 serviceRating" style="height:50px;float:right;"></span>-->
                 <!--<div style="height:30px;float:right;"><p><a id="openFormNewCreation" ng-href="#commentPublishPanelDiv" ng-click="openFormOld()"><font color="green"><i class="fa fa-comment-o"></i> Add a Comment</font></a></p></div>-->
 
-                <div  class="col-md-12 searchLocal">
-                    <form ng-controller="myController" ng-submit="userCreatedSubmit()" name="userNewCreationForm">
+                <div style="width:100%">
+                    <form ng-submit="userCreatedSubmit()" name="userNewCreationForm" class="col-md-12">
                             <p>Would you like to add a new company?</p>
 
                             <p class="form-group">
-                                <label>Name:</label>
+                                <label>Name</label>
 
-                                <input ng-controller="myController" type="text" ng-model="newCompanyName" placeholder="{{search.val}}">
+                                <input class="form-control" type="text" ng-model="newCompanyName" ng-view="{{searchMap}}"/>
                             </p>
 
                             <p class="form-group">
-                                <label>Review:</label>
+                                <label>Review</label>
 
-                                <input-stars style="margin-top:20px;" max="5" class="col-md-12" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="userCreatedValue"></input-stars>
+                                <input-stars style="width:100%;margin-left:-7px;" max="5" class="" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="userCreatedValue"></input-stars>
                             </p>
 
                             <p class="form-group">
-                                <label>Comment:</label>
-                                <textarea type="text" class="form-control" ng-model="userCreatedComment"></textarea>
+                                <label>Comment</label>
+                                <textarea type="text" class="col-md-12 form-control" ng-model="userCreatedComment"></textarea>
                             </p>
 
-                            <p class="form-group">
-                                <input type="submit" style="margin-top:30px;margin-bottom:30px;" class=" btn btn-primary form-control"  value="Save" />
-                            </p>
+                            <div class="col-md-12 form-group">
+                               <!-- <input type="submit" style="margin-top:30px;margin-bottom:30px;" class=" btn btn-primary form-control" ng-click="$event.preventDefault()" value="Save" />-->
+                                <button style="width:40%;float:left;margin-top:30px;margin-bottom:30px;" class="col-md-4 btn btn-warning form-control" value="Cancel" id="cancel" type="button" remove-modal ng-click="cancel()">Cancel</button>
+                                <input type="submit" style="width:40%;margin-top:30px;margin-bottom:30px;margin-left:5px;" class=" col-md-4 btn btn-primary form-control" value="Save" id="ok" remove-modal ng-click="ok()">
+
+                            </div>
 
                         
                     </form>
-                </div>
+               <!--  --> </div>
             </div>
 
         </div>

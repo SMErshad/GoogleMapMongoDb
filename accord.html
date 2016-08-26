@@ -1,41 +1,50 @@
-﻿<div ng-controller="myController" class="col-md-12" ng-cloak id="commentPublishPanelDiv">
+﻿<div style="width:100%;" id="commentPublishPanelDiv{{panelVal}}">
     <div class="panel panel-success" >
         <div class="panel-heading" role="tab" id="heading{{panelVal}}">
             <h4 class="panel-title">
-                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{panelVal}}" aria-expanded="true" aria-controls="collapse{{panelVal}}">
-                    Service/Product Title
+                <a role="button"  data-toggle="collapse" data-parent="#accordion" href="#collapse{{panelVal}}" aria-expanded="true" aria-controls="collapse{{panelVal}}">
+                    {{service.Name}}
                 </a>
             </h4>
         </div>
         <div id="collapse{{panelVal}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{panelVal}}">
-            <div class="panel-body" id="commentPublish" style="height:220px;">
-                <p class="col-md-5" ng-bind-html="serviceDetails" id="service-details" style="height:80px;"></p>
-                <span class="col-md-7 serviceRating" style="height:50px;float:right;"></span>
-                <div style="height:30px;float:right;"><p><a id="openFormOldAll{{panelVal}}" ng-href="#commentPublishPanelDiv" ng-click="openFormOld()"><font color="green"><i class="fa fa-comment-o"></i> Add a Comment</font></a></p></div>
-                
-                <div class="col-md-12" id="formOld{{panelVal}}" style="height:150px;" hidden>
-                    <form name="userForm">
-                        <div>
-                            
-                           <span class="form-group col-md-4">
-                                <label>Rate it:</label>                           
-                                    <input-stars style="margin-top:20px;" max="5" class="col-md-12" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="last_value_one"></input-stars>
-                           </span>
-                            
-                            <span class="form-group col-md-4" >
-                                <label>Add Comment:</label>
-                                <textarea type="text" class="form-control" ng-model="userCommentOld"></textarea>
-                            </span>
-                            
-                            <span class="form-group col-md-4">
-                                <input type="submit" style="margin-top:30px;margin-bottom:30px;" class=" btn btn-primary form-control" ng-model="userCommentSubmitOld" ng-click="submitFormOld()" value="Add" />
-                            </span>
-
-                        </div>
-                    </form>
+            <div class="row panel-body" id="commentPublish">
+                <div class="row">
+                    <div class="col-md-6" ng-bind-html="serviceDetails" id="service-details" style="height:20px;"></div>
+                    <div class="col-md-6 serviceRating" id="serviceRating{{panelVal}}" style="height:50px;float:right;"></div>
                 </div>
+                <div class="row" style="height:20px;"></div>
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6" id="userService{{panelVal}}"><p><a id="openFormOldAll{{panelVal}}" ng-href="#commentPublishPanelDiv" ng-click="openFormOld()"><font color="green"><i class="fa fa-comment-o"></i> <strong>Please Add Comment</strong></font></a></p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" id="formOld{{panelVal}}" hidden>
+                        <form name="userForm"  ng-submit="submitFormOld()">
+                            
+                            
+                               <div class="form-group col-md-4">
+                                                              
+                                        <input-stars max="5" class="col-md-12" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="last_value_user"></input-stars>
+                               </div>
+                            
+                                <div class="form-group col-md-4" >
+                                    <label>Add Comment:</label>
+                                    <textarea type="text" class="form-control" ng-model="userCommentOld" rows="2"></textarea>
+                                </div>
+                            
+                                <div class="form-group col-md-4">
+                                    <input type="submit" style="margin-top:30px;margin-bottom:30px;" class=" btn btn-primary form-control" value="Add" />
+                                </div>
+
+                            
+                        </form>
+                    </div>
+                    <div class="row" style="height:20px;"></div>
+                </div>
+                
+              </div>
              </div>
             
         </div>
     </div>
-</div>

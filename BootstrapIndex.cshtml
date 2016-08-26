@@ -1,0 +1,449 @@
+﻿
+    <header id="header" style="">
+        
+        <div class="navbar" role="banner" style="background-color:#053509;margin-top:0px;border-radius:0px 0px;padding: 0px 0px 0px;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="BootstrapIndex">
+                        <h1><img src="~/images/unique_1.png" alt="logo"></h1>
+                    </a>
+
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="BootstrapIndex">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#">Pages<i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu">
+                                <li><a href="aboutus.html">About</a></li>
+                                <li><a href="aboutus2.html">About 2</a></li>
+                                <li><a href="service.html">Services</a></li>
+                                <li><a href="pricing.html">Pricing</a></li>
+                                <li><a href="contact.html">Contact us</a></li>
+                                <li><a href="contact2.html">Contact us 2</a></li>
+                                <li><a href="404.html">404 error</a></li>
+                                <li><a href="coming-soon.html">Coming Soon</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="blog.html">Blog<i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu" style="background-color:darkseagreen">
+                                <li><a href="blog.html">Blog Default</a></li>
+                                <li><a href="blogtwo.html">Timeline Blog</a></li>
+                                <li><a href="blogone.html">2 Columns + Right Sidebar</a></li>
+                                <li><a href="blogthree.html">1 Column + Left Sidebar</a></li>
+                                <li><a href="blogfour.html">Blog Masonary</a></li>
+                                <li><a href="blogdetails.html">Blog Details</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="portfolio.html">Portfolio<i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu" style="background-color:darkseagreen">
+                                <li><a href="portfolio.html">Portfolio Default</a></li>
+                                <li><a href="portfoliofour.html">Isotope 3 Columns + Right Sidebar</a></li>
+                                <li><a href="portfolioone.html">3 Columns + Right Sidebar</a></li>
+                                <li><a href="portfoliotwo.html">3 Columns + Left Sidebar</a></li>
+                                <li><a href="portfoliothree.html">2 Columns</a></li>
+                                <li><a href="portfolio-details.html">Portfolio Details</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="shortcodes.html ">Shortcodes</a></li>
+                    </ul>
+                </div>
+                <div class="search">
+                    <form role="form">
+                        <i class="fa fa-search"></i>
+                        <div class="field-toggle">
+                            <input type="text" class="search-form" autocomplete="off" placeholder="Search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+      @*  <div class="row" style="height:20px"></div>*@
+ </header>
+    <!--/#header-->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 overflow">
+            <div class="social-icons pull-right">
+                <ul class="nav nav-pills">
+                    <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                    <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                    <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href=""><i class="fa fa-dribbble"></i></a></li>
+                    <li><a href=""><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <section id="home-slider" style="background-color:white;border-radius:3px 4px;border:0px;">
+        <div class="container">
+            <div class="row">
+                @*<div class=" col-md-12">*@
+                   @* <div class="slide-text col-md-6">*@
+                        <div id="incept" class="main-slider search searchLocal col-sm-6 animate-in" style="border-left:0px;border-right:0px">
+
+
+
+                            <input id="pac-input" ng-model="searchMap" ng-enter name="pac-input" class="controls" type="text" placeholder="Enter a location" />
+                            
+                                <div my-map name="map" id="map" class="col-md-12" style="height:60%;">
+
+                                </div>
+                            
+                            <div class="row"><div class="col-md-12"  style="height:20px"></div></div>
+                           
+                             <div class="row">
+                                <div id="addServiceButton" class="col-md-12" hidden>
+                                 <button id="btnService" class="btn btn-primary btn-block" ng-click="serviceAdding()" style="background-color:#c9e1c9;border:0px">Add a service/product of this company</button>
+                                </div>
+                            </div>
+                           
+                             <div class="row"><div class="col-md-12" style="height:20px"></div></div>
+
+                           
+
+                            <div class="row" id="serviceForm" hidden>
+
+                                <div class="col-md-12">
+
+
+                                    <div id="serviceFormPanel" class="panel" style="">
+                                        <div id="servicePanelHead" class="panel-heading"  style="background-color:#c9e1c9;color:black"><h4>Add New Services/Products</h4></div>
+                                        <div class="panel-body" style="background-color:#bdbaba;">
+                                            <form ng-submit="submitOne()" style="align-content:center">
+                                                <div class="row form-group">
+                                                    <div class="col-md-12" style="padding-left:75px">
+                                                        <label>Service/Product Name</label>
+                                                        <input  type="text" name="name" class="form-control" ng-model="serviceName" required />
+                                                        <span style="background-color:brown; width:250px" ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Service/Product name is required.</span>
+                                                    </div>
+                                                </div>
+                                                <div class=" row form-group">
+                                                    <div class="col-md-12" style="height:40px;padding-left:75px">
+                                                    <label>Rate</label>
+                                                        
+                                                            <input-stars max="5" class="col-md-12" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="last_value"></input-stars>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-md-12" style="padding-left:75px">
+                                                        <label>Comment</label>
+                                                        <textarea  type="text" class="form-control" ng-model="userComment"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class=" row form-group">
+                                                    <div class="col-md-12" style="padding-left:75px">
+                                                         <input  type="submit" class=" btn form-control" style="background-color:#c9e1c9;" value="Add" />
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-12" id="serviceCollection" style="">
+
+                                </div>
+                            </div>
+
+
+                            @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiyrLMZ0W6zBGFpzBQcSsqpoMsxKSFBUc&signed_in=true&libraries=places" async defer></script>*@
+
+                        </div>
+                    @*</div>  *@
+                   @* <div class="" style="height:100%;">*@
+
+                        <div id="follow" class="panel col-sm-6" style="border-left:0px;border-right:0px;margin-left:0px;margin-right:0px;border-top:10px;background-color:darkgrey;float:right;border-color:darkgrey;" hidden>
+                             <div class="row"  id="commentsDiv" style="background-color:#efefef;border:0px">
+                                 <div class="row" id="placeName" style="background-color:#c9e1c9;color:darkgreen;padding-left:5px;padding-left:5px;border-radius:3px 3px;border:0px;height:40px;text-align:center;"><h4>Reviews</h4><span></span></div>
+
+                                <div class="row" id="md-user-input" style="overflow-x:hidden;background-color:#efefef;padding-left:5px;padding-left:5px;">
+
+
+                                </div>
+                                <div id="md-form-input" class="row" style="overflow-x:hidden;padding-left:5px;padding-left:5px;background-color:#efefef;">#dff0d8
+
+                                </div>
+                                <div id="commentPublish" class="row" style="height:100px;overflow-x:hidden;background-color:#efefef;">
+
+                                </div>
+                                <div id="md-title-comments" class="row" style="height:30px;overflow-x:hidden;padding-left:5px;padding-left:5px;background-color:#c9e1c9;color:darkgreen;border-radius:3px 3px;text-align:center;overflow-x:hidden;overflow-y:hidden">
+                                    <h5><i class="fa fa-comments" style="color:darkgreen"></i>&nbsp;Comments&nbsp;<i class="fa fa-comments" style="color:darkgreen"></i></h5>
+                                </div>
+                                <div id="animatedDiv" class="row animatedDiv" style="height:100%;overflow-x:hidden;background-color:white;border:0px;overflow-y:hidden">
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                   
+               @* </div> *@ 
+            </div>
+        </div>
+        <div class="preloader"><i class="fa fa-sun-o fa-spin"></i></div>
+    </section>
+    <!--/#home-slider-->
+
+/**********************************************************
+
+
+
+
+
+
+    @*<section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    <div class="single-service">
+                        <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="300ms">
+                            <img src="images/home/icon1.png" alt="">
+                        </div>
+                        <h2>Incredibly Responsive</h2>
+                        <p>Ground round tenderloin flank shank ribeye. Hamkevin meatball swine. Cow shankle beef sirloin chicken ground round.</p>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="single-service">
+                        <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="600ms">
+                            <img src="images/home/icon2.png" alt="">
+                        </div>
+                        <h2>Superior Typography</h2>
+                        <p>Hamburger ribeye drumstick turkey, strip steak sausage ground round shank pastrami beef brisket pancetta venison.</p>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="900ms">
+                    <div class="single-service">
+                        <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="900ms">
+                            <img src="images/home/icon3.png" alt="">
+                        </div>
+                        <h2>Swift Page Builder</h2>
+                        <p>Venison tongue, salami corned beef ball tip meatloaf bacon. Fatback pork belly bresaola tenderloin bone pork kevin shankle.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#services-->
+    <section id="action" class="responsive">
+        <div class="vertical-center">
+            <div class="container">
+                <div class="row">
+                    <div class="action take-tour">
+                        <div class="col-sm-7 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                            <h1 class="title">Triangle Corporate Template</h1>
+                            <p>A responsive, retina-ready &amp; wide multipurpose template.</p>
+                        </div>
+                        <div class="col-sm-5 text-center wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                            <div class="tour-button">
+                                <a href="#" class="btn btn-common">TAKE THE TOUR</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#action-->
+    <section id="features">
+        <div class="container">
+            <div class="row">
+                <div class="single-features">
+                    <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <img src="images/home/image1.png" class="img-responsive" alt="">
+                    </div>
+                    <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <h2>Experienced and Enthusiastic</h2>
+                        <P>Pork belly leberkas cow short ribs capicola pork loin. Doner fatback frankfurter jerky meatball pastrami bacon tail sausage. Turkey fatback ball tip, tri-tip tenderloin drumstick salami strip steak.</P>
+                    </div>
+                </div>
+                <div class="single-features">
+                    <div class="col-sm-6 col-sm-offset-1 align-right wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <h2>Built for the Responsive Web</h2>
+                        <P>Mollit eiusmod id chuck turducken laboris meatloaf pork loin tenderloin swine. Pancetta excepteur fugiat strip steak tri-tip. Swine salami eiusmod sint, ex id venison non. Fugiat ea jowl cillum meatloaf.</P>
+                    </div>
+                    <div class="col-sm-5 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <img src="images/home/image2.png" class="img-responsive" alt="">
+                    </div>
+                </div>
+                <div class="single-features">
+                    <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <img src="images/home/image3.png" class="img-responsive" alt="">
+                    </div>
+                    <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <h2>Experienced and Enthusiastic</h2>
+                        <P>Ut officia cupidatat anim excepteur fugiat cillum ea occaecat rump pork chop tempor. Ut tenderloin veniam commodo. Shankle aliquip short ribs, chicken eiusmod exercitation shank landjaeger spare ribs corned beef.</P>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#features-->
+    <section id="clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="clients text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <p><img src="images/home/clients.png" class="img-responsive" alt=""></p>
+                        <h1 class="title">Happy Clients</h1>
+                        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br> Ut enim ad minim veniam, quis nostrud </p>
+                    </div>
+                    <div class="clients-logo wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="images/home/client1.png" class="img-responsive" alt=""></a>
+                        </div>
+                        <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="images/home/client2.png" class="img-responsive" alt=""></a>
+                        </div>
+                        <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="images/home/client3.png" class="img-responsive" alt=""></a>
+                        </div>
+                        <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="images/home/client4.png" class="img-responsive" alt=""></a>
+                        </div>
+                        <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="images/home/client5.png" class="img-responsive" alt=""></a>
+                        </div>
+                        <div class="col-xs-3 col-sm-2">
+                            <a href="#"><img src="images/home/client6.png" class="img-responsive" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#clients-->
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center bottom-separator">
+                    <img src="images/home/under.png" class="img-responsive inline" alt="">
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="testimonial bottom">
+                        <h2>Testimonial</h2>
+                        <div class="media">
+                            <div class="pull-left">
+                                <a href="#"><img src="images/home/profile1.png" alt=""></a>
+                            </div>
+                            <div class="media-body">
+                                <blockquote>Nisi commodo bresaola, leberkas venison eiusmod bacon occaecat labore tail.</blockquote>
+                                <h3><a href="#">- Jhon Kalis</a></h3>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="pull-left">
+                                <a href="#"><img src="images/home/profile2.png" alt=""></a>
+                            </div>
+                            <div class="media-body">
+                                <blockquote>Capicola nisi flank sed minim sunt aliqua rump pancetta leberkas venison eiusmod.</blockquote>
+                                <h3><a href="">- Abraham Josef</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="contact-info bottom">
+                        <h2>Contacts</h2>
+                        <address>
+                            E-mail: <a href="mailto:someone@example.com">email@email.com</a> <br>
+                            Phone: +1 (123) 456 7890 <br>
+                            Fax: +1 (123) 456 7891 <br>
+                        </address>
+                        <h2>Address</h2>
+                        <address>
+                            Unit C2, St.Vincent's Trading Est., <br>
+                            Feeder Road, <br>
+                            Bristol, BS2 0UY <br>
+                            United Kingdom <br>
+                        </address>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="contact-form bottom">
+                        <h2>Send a message</h2>
+                        <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" required="required" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control" required="required" placeholder="Email Id">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Your text here"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-submit" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="copyright-text text-center">
+                        <p>&copy; Smart Aspects 2016. All Rights Reserved.</p>
+                        <p>Designed by <a target="_blank" href="http://www.smartaspects.com">Smart Aspects</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/#footer-->
+    
+</body>
+        
+        *@
+
+
+
+
+***************************************************/
+
+
+@*<div class="row" ng-controller="myController" style="height:100%;">
+    <div id="companyUserComment" when-visible="animateElementIn" class="row car-container" style="height:100%">
+        <div class="row car panel-body" style="height:200px;">
+            <div class="row" id="block" ng-controller="myController">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">Would you like to put a comment as well?</div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="row">
+                    <form name="companyCommentForm" ng-controller="myController" ng-submit="addUserComment()">
+                        <div class="row">
+                            <div class="col-md-8">
+                                 <textarea ng-model="companyComment" form="companyCommentForm" style="background-color:#525c51;" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <input  style="background-color:#203e22;" class="col-md-6 btn btn-success form-control" type="submit" value="Add a comment" />
+                            <div class="col-md-3"></div>
+                        </div>
+                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
