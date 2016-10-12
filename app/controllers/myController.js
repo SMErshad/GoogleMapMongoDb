@@ -4,8 +4,11 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
     var company = $rootScope.company;
     var place = $rootScope.place;
-    $scope.entities = [];
+    var h = $(window).height();
+    $scope.winHeighthalf = h / 4;
 
+    //$scope.entities = [];
+    //$scope.searchMap;
 
     var self = this;
 
@@ -29,33 +32,10 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
-            template: '<div modal-directive class="col-md-12" style="height:500px"></div>',
+            template: '<div modal-directive class="col-md-12" style="height:450px"></div>',
             $scope:true,
             controller: 'ModalInstanceCtrl',
-            //    function ($scope, $modalInstance) {
-               
-            //        $scope.ok = function () {
-            //            $modalInstance.close();
-            //        };
-                
-               
-            //        $scope.cancel = function () {
-            //            $modalInstance.dismiss('cancel');
-            //        };
-                
-            //},
-
-            //    //var el = angular.element.find('new-entry');
-            //    //$compile(el)($scope);
-
-            //    $scope.ok = function () {
-            //        $modalInstance.close();
-            //    };
-
-            //    $scope.cancel = function () {
-            //        $modalInstance.dismiss('cancel');
-            //    };
-            //},
+            
             size: size,
             resolve: {
                 //items: function () {
@@ -71,28 +51,45 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
         });
     };
 
+
+
+    $scope.openServiceModal = function (size) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            template: '<div modal-service class="col-sm-6" style="height:450px"></div>',
+            $scope: true,
+            controller: 'ModalInstanceCtrl1',
+
+            size: size,
+            resolve: {
+                //items: function () {
+                //    return $scope.items;
+                //}
+            }
+        });
+
+        modalInstance.result.then(function () {
+            //$scope.selected = selectedItem;
+        }, function () {
+            //$log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+
+
+
     $scope.toggleAnimation = function () {
         $scope.animationsEnabled = !$scope.animationsEnabled;
     };
 
-    //self.ok = function () {
-    //     $modalInstance.close();
-    // };
-
-    // self.cancel = function () {
-    //      $modalInstance.dismiss('cancel');
-    // };
-
-    //modalInstance.result.then(function (selectedItem) {
-    //    $scope.selected = selectedItem;
-    //}, function () {
-    //    //$log.info('Modal dismissed at: ' + new Date());
-    //});
-
-
-
             ///********modal directive ends here*********************//
-
+    $scope.modalPosition = function () {
+        var left = angular.element('#pac-input').prop(offsetLeft);
+        var top = angular.element('#pac-input').prop(offsetTop);
+        var modalTop = top + angular.element('#pac-input').height() + 5;
+        $('#modalpanel').offset({top: top, left: modalTop});
+    };
 
 
 
@@ -111,63 +108,25 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                          .then(function (data, status, headers, config, statusText) {
                              //data = $.parseJSON(data);
                            if (data.data[0] != null && data.data[1] != null)
-                             var responseData = angular.fromJson(data.data);
-                             var container = document.getElementsByClassName('pac-container');
-                           
-                             //if (!($rootScope.flag1 == true && responseData[0] == null && responseData[1] == null && (angular.element("#pac-input").text() != null)) || !($rootScope.flag1 == false && responseData[0] == null && responseData[1] == null && (angular.element("#pac-input").text() != null) && angular.element('body div .pac-container').css('display') == 'none')) {
-                             if (responseData[0] == null && responseData[1] == null) {
-                             //var x = 0;
-                                     //var deferred = $q.defer();
-                                     //if (responseData) {
-                                     //    deferred.resolve(responseData);
-                                     //} else {
-                                     //    deferred.reject("Wait, there are something wrong with the directive.");
-                                     //};
-
-                                     //var promise = deferred.promise;
-
-                                     //promise.then(function (template) {
-                                     //    x++;
-                                     //    if (x == 1) {
-                                     //        //alert("ghfghfghf");
-                                     //    }
-                                     //}, function (reason) {
-                                     //    $element.text("Fail (" + reason + ")");
-                                     //    console.log("Failed promise.");
-                                     //});
-                                     //$scope.$watch($element, function (val) {
-                                     //    $scope.$eval(val);
-                                     //});
-                                     //promise.then(function (x) {
-                                     //setTimeout(function () {
-                                     //$scope.$apply(function () {
+                             var responseData = angular.fromJson(data.data); 
+                             
+                               if (responseData[0] == null && responseData[1] == null) {
+                             
                                      $scope.open('lg');
-                                     //});
-                                     //}, 1000);
-
-                                     //}
-                                     //});
-                                 
+                                     
                              }
-                             //else {
-                             //    console.log(data.data);
-                             //    //var response = data.data;
-                             //    ////console.log(response);
-                             //    //response = angular.fromJson(response);
-                             //    //var companyCreate = [];
-                             //    //var deferred = $q.defer();
-                             //    //var promise = deferred.promise;
+                             else {
+                                 console.log(data.data);
+                                 $scope.entities = [];
+                                     angular.forEach(responseData, function (item) {
+                                         item = angular.fromJson(item);
+                                         $scope.entities.push(item);
 
-                             //    if (responseData[0] != null && responseData[1] != null) {
-                             //        angular.forEach(responseData, function (item) {
-                             //            item = angular.fromJson(item);
-                             //            $scope.entities.push(item);
-
-                             //            console.log(item);
-                             //        });
-                             //    }
-                             //    //angular.element("#localFound").html($scope.entities);
-                             //}
+                                         console.log(item);
+                                     });
+                                 
+                                 //angular.element("#localFound").html($scope.entities);
+                             }
                          });
                     
                     
@@ -193,7 +152,14 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
             self.start = function () {
 
+                //$("#map").on("load", function () {
+                //    angular.element("#follow").show();
+                //});
+                //if ($("#map").is(":visible") == true) {
+                //    angular.element("#follow").show();
+                //}
 
+                angular.element("#addServiceButton").show();
 
                 var company = $rootScope.company;
                 var place = $rootScope.place;
@@ -203,12 +169,12 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                 $('#md-user-input').html("");
                 $("#md-comments").html("");
 
-                $('#md-user-input').prepend('<div id="jRateFinal" style="height:70px;width:350px;" class="jRate"></div><div id="iw-container" class=""><strong>' + place.name + '</strong><br>' +
+                $('#md-user-input').prepend('<div class="row"  style="text-align:center"><div id="jRateFinal" class="jRate col-md-6"></div></div><div id="iw-container"  style="text-align:center" class=""><strong>' + place.name + '</strong><br>' +
                                               'Place ID: ' + place.place_id + '<br>' + place.formatted_address + '<br><br>');
 
                 $(".jRate").jRate({
-                    startColor: 'black',
-                    endColor: 'black',
+                    startColor: 'green',
+                    endColor: 'green',
                     rating: place.rating,
                     onSet: function (score) {
                         jRateScore = score;
@@ -223,7 +189,7 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                             $scope.formComment = [];
                             //$scope.myHtml = '<div id="block" style="height:120px;" >Would you like to put a comment as well?<br><textarea id="addComment"></textarea><br><button ng-model="submitComment" ng-click="addUserComment()" id="submitComment" value="">Add a Comment</button></div>';
                             //$scope.formComment.push($scope.myHtml);
-                            var newUserFormAnimatedDirective = angular.element('<div ng-controller="myController" style="height:100%;"><div id="companyUserComment"  when-visible="animateElementIn" class="car-container" style="height:100%"><div class="car panel-body"  style="height:150px;"><div id="block" ng-controller="myController" ><p>Would you like to put a comment as well?</p><br><form name="companyCommentForm" ng-controller="myController" ng-submit="addUserComment()"><p class="form-group"><textarea ng-model="companyComment" form="companyCommentForm" style="width:250px;" class="form-control" rows="3"></textarea></p><br><p class="form-group"><input class="btn btn-success form-control" type="submit" value="Add a comment"/></p></form></div></div></div></div>');
+                            var newUserFormAnimatedDirective = angular.element('<div class="row" ng-controller="myController" style="height:100%;"><div id="companyUserComment" when-visible="animateElementIn" class="row car-container" style="height:100%"><div class="row car panel-body"><div class="row" id="block" ng-controller="myController"><div class="row"><div class="col-md-2"></div><div class="col-md-8"><i class="fa fa-pencil-square-o" aria-hidden="true" style="color:green"></i>&nbsp;&nbsp;Would you like to put a comment as well?&nbsp;&nbsp;<i class="fa fa-pencil-square-o" aria-hidden="true" style="color:green"></i></div><div class="col-md-2"></div></div><div class="row"><form class="col-md-8" name="companyCommentForm" ng-controller="myController" ng-submit="addUserComment()" style="margin-left:138px"><textarea class="col-md-12" ng-model="companyComment" form="companyCommentForm" style="background-color:white;padding-left:100px;border:0px;border-radius:2px;" rows="3"></textarea><input  style="background-color:#c9e1c9;border:0px;color:black" class=" btn btn-success form-control btn-block" type="submit" value="Add" /></form></div></div></div></div></div>');
                             var element = $compile(newUserFormAnimatedDirective)($scope);
                             angular.element("#md-form-input").append(element);
                         });
@@ -244,8 +210,8 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
                                 //if (responseRating == NaN) {
                                 $(".jRate").jRate({
-                                    startColor: 'black',
-                                    endColor: 'black',
+                                    startColor: 'green',
+                                    endColor: 'green',
                                     rating: responseRating,
                                     readonly: true
                                 });
@@ -285,7 +251,7 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                                    });
                                    //var x = $("#mdCommentsAnimated");
                                    //angular.forEach($scope.googleComments, function (item, index) {
-                                   var newAnimatedDirective = angular.element('<div  ng-controller="myController" style="height:100%;"  id="mdCommentsAnimated"><div ng-repeat="car in googleComments" bind-scroll-to=".animatedDiv" when-visible="animateElementIn"    class="car-container" style="height:120px;"><div class="car panel-body" id="commentPublish" style="height:100px;"><i class="fa fa-quote-left" style="color:green"></i>{{car}}<i class="fa fa-quote-right" style="color:green"></i></div></div></div>');
+                                   var newAnimatedDirective = angular.element('<div ng-repeat="car in googleComments" bind-scroll-to=".animatedDiv" when-visible="animateElementIn" class="car-container"><div class="car panel-body" id="commentPublish" style="color:black"><i class="fa fa-quote-left" style="color:green;font-size:10px;"></i>&nbsp;{{car}}&nbsp;<i class="fa fa-quote-right" style="color:green;font-size:10px;"></i></div></div>');
                                    var element = $("#animatedDiv").prepend(newAnimatedDirective);
                                    $compile(newAnimatedDirective)($scope);
                                    //});
@@ -338,7 +304,7 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
                                            if ($scope.ourComments.length > 0) {
 
-                                               var newOurCommentAnimatedDirective = angular.element('<div  ng-controller="myController" style="height:100%;"  id="mdCommentsAnimated"><div ng-repeat="car in ourComments" bind-scroll-to=".animatedDiv" when-visible="animateElementIn"   class="car-container" style="height:120px;"><div class="car panel-body" id="commentPublish" style="height:100px;"><i class="fa fa-quote-left" style="color:green"></i>{{car}}<i class="fa fa-quote-right" style="color:green"></i></div></div></div>');
+                                               var newOurCommentAnimatedDirective = angular.element('<div ng-repeat="car in ourComments" bind-scroll-to=".animatedDiv" when-visible="animateElementIn"   class="car-container"><div class="car panel-body" id="commentPublish" style="color:black"><i class="fa fa-quote-left" style="color:green;font-size:10px;"></i>&nbsp;{{car}}&nbsp;<i class="fa fa-quote-right" style="color:green;font-size:10px;"></i></div></div>');
                                                var element = $("#animatedDiv").prepend(newOurCommentAnimatedDirective);
                                                $compile(newOurCommentAnimatedDirective)($scope);
 
@@ -350,8 +316,8 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                                            //$("#md-comments").append(htmlBoth);
                                            var services = result.Services;
 
-                                           $scope.services = services;
-                                           $scope.panelValue = [];
+                                           //$scope.services = services;
+                                           $scope.panelValue = [];  
                                            $scope.panelService = [];
                                            $rootScope.i = 0;
                                            if (services.length > 0) {
@@ -359,12 +325,15 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
                                                    $scope.panelValue.push(key);
                                                    $scope.panelService.push(service);
+                                                   //$scope.panelVal = key;
+                                                   //$scope.service = service;
 
-                                                   var newDirective = angular.element('<div service-product ng-controller="myController" style="height:200px;"></div>');
+                                                   var newDirective = angular.element('<div class="row"><div service-product class="col-md-12" ng-controller="myController" style="float:left;"></div></div>');
                                                    var element = $("#serviceCollection").append(newDirective);
 
 
                                                    $compile(newDirective)($scope);
+                                                   //($rootScope.i)++;
                                                    //$scope.i += 1;
 
 
@@ -436,14 +405,53 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
             };
 
 
+
+
+            $scope.serveComments = function () {
+                $("#jRateFinal").hide();
+                $("#md-user-input").hide();
+                var serveName = $rootScope.serveEdit;
+
+                var company = $rootScope.company;
+                var services = company.Services;
+                var comms = [];
+                angular.forEach(services, function (service, key) {
+                    if (service.Name == serveName) {
+                        comms.push(service.serviceComments);
+                        $scope.comms = comms;
+
+                        $("#animatedDiv").hide();
+
+                        //angular.forEach($scope.comms, function (car, key) {
+
+                            var newAnimatedDirective = angular.element('<div ng-repeat="car in comms" bind-scroll-to=".animatedDiv" when-visible="animateElementIn" class="car-container"><div class="car panel-body" id="commentPublish" style="color:black"><i class="fa fa-quote-left" style="color:green;font-size:10px;"></i>&nbsp;{{car}}&nbsp;<i class="fa fa-quote-right" style="color:green;font-size:10px;"></i></div></div>');
+                            var element = $("#animatedDivServices").prepend(newAnimatedDirective);
+                            $compile(newAnimatedDirective)($scope);
+
+                        //});
+                    }
+                    
+                });
+
+
+            };
+
+
             $scope.openFormOld = function () {
 
-                $("#formOld" + $scope.panelVal).show();
+                //$("#formOld" + $scope.panelVal).show();
+                $scope.openServiceModal('lg');
+                $("#userService" + $scope.panelVal).hide();
             };
 
             $scope.submitFormOld = function () {
+               //ok();
+                //$("#formOld" + $scope.panelVal).hide();
+                $("#userService" + $scope.panelVal).show();
 
-                $("#formOld" + $scope.panelVal).hide();
+                var sum = 0;
+
+
                 var company = $rootScope.company;
 
                 var PlaceID = company.PlaceId;
@@ -455,7 +463,7 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                 //alert(score);
 
                 var Name = company.Name;
-                var Address = company.formatted_address;
+                //var Address = company.formatted_address;
                 //angular.forEach(company.services,function(service,key){
                 //        if(service.Name ==   ){
                 //        }
@@ -473,26 +481,55 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                 };
 
                 var Product = new Product();
+                var Products = [];
+                Products.push(Product);
 
-                var Service = function Service() {
-                    //this.Id = 1;
-                    //this.Name = "KFC";
-                    this.Type = "Food";
-                    this.Description = "Burger";
-                    this.serviceRating = [];
-                    this.serviceComments = [];
-                    this.Name = $scope.serviceName;
-                    //this.serviceRating = company.Services;
-                    this.serviceRating.push($scope.last_value_one);
-                    this.serviceComments.push($scope.userCommentOld);
-                };
-
-                var Service = new Service();
                 var Services = company.Services;
-                Services.push(Service);
+                var ser = null;
+                
+                angular.forEach(Services, function (service, key) {
+                    
+                    if(service.Name == $scope.service.Name)
+                    {
+                        //angular.forEach(service.serviceRating, function (eachRate, key1) {
+                        //    sum = sum + eachRate;
+                        //});
+
+                        //sum = sum/service.serviceRating.length;
+                        ser = service;
+                                              
+                        
+                    }
+                    //Services.push(service);
+
+                });
+                sum = ser.serviceRating[0];
+                sum = (sum + $scope.last_value_user) / 2;
+                ser.serviceRating = [];
+                ser.serviceRating.push(sum);
+                ser.serviceComments.push($scope.userCommentOld);
+                //Services.push(ser);
+
+                
+                //var Service = function Service() {
+                //    //this.Id = 1;
+                //    //this.Name = "KFC";
+                //    this.Type = "Food";
+                //    this.Description = "Burger";
+                //    this.serviceRating = [];
+                //    this.serviceComments = [];
+                //    this.Name = $scope.serviceName;
+                //    //this.serviceRating = company.Services;
+                //    this.serviceRating.push($scope.last_value_one);
+                //    this.serviceComments.push($scope.userCommentOld);
+                //};
+
+                //var Service = new Service();
+                //var Services = company.Services;
+                //Services.push(Service);
 
                 company = {
-                    "PlaceId": PlaceID, "Name": Name, "Rating": Rating, "Comments": ["", "", "", "", ""], "UsersComments": [5], "Department": null, "Product": Product, "Services": Services
+                    "PlaceId": PlaceID, "Name": Name, "Rating": Rating, "Comments": ["", "", "", "", ""], "UsersComments": [5], "Department": null, "Products": Products, "Services": Services
                 };
 
                 $rootScope.company = company;
@@ -503,34 +540,60 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                             //$scope.places = data;
                             console.log(data);
                             data = $.parseJSON(data.data);
-                            services = data.Services;
+                           var services = data.Services;
 
-                            $scope.services = services;
+                            $scope.services = data.Services;
+                            //$scope.Rating = $scope.services.serviceRating;
+
                             var keyIterate = 0;
-                            var serviceIterate = '';
+                            var serviceIterateUpdate = '';
+                            //serviceIterate = services[length - 1];
 
                             //$scope.panelValue.length = 0;
                             //$scope.panelService.length = 0;
                             //var panelVal = Math.max($scope.panelValue);
-
+                            //var keepGoing = true;
                             angular.forEach(services, function (service, key) {
+                              //  if (keepGoing) {
+                                if (service.Name == $scope.service.Name) {
+                                    //keyIterate = key;
+                                    serviceIterateUpdate = service;
+                                    
+                                }
 
-                                keyIterate = key;
-                                serviceIterate = service;
+                             });
 
-                            });
+                                        //$scope.service = serviceIterate;
+                                        //$rootScope.i = 0;
+                                        //var panelIterator = 
 
-                            //$rootScope.i = 0;
-                            //var panelIterator = 
+                                        $scope.panelValue.push($rootScope.i);
+                                        //$scope.panelVal = $scope.panelValue[$rootScope.i];
+                                        $scope.panelService.push(serviceIterateUpdate);
+                                        //$scope.Rating = serviceIterate.serviceRating;
 
-                            $scope.panelValue.push($rootScope.i);
-                            //$scope.panelVal = $scope.panelValue[$rootScope.i];
-                            $scope.panelService.push(serviceIterate);
-                            var newDirective = angular.element('<div service-product ng-controller="myController" style="height:200px;"></div>');
-                            var element = $("#serviceCollection").prepend(newDirective);
-                            $compile(newDirective)($scope);
+                                        //$scope.serviceDetails = '<strong>Service/Product:</strong> ' + $scope.service.Name + '<br>' + '<i class="fa fa-commenting"></i> ' + $scope.service.serviceComments + '</br></br>';
 
+                                        //var starDirective = angular.element('<input-stars max="5" class="col-md-12" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="Rating" ></input-stars>');
 
+                                        //angular.element("#serviceRating" + $rootScope.i).html();
+                                        //var updatedValue = angular.element("#serviceRating" + $rootScope.i).append(starDirective);
+                                       
+                                        angular.element(document.querySelector("#commentPublishPanelDiv" + $scope.panelVal)).parent().parent().remove();
+                                       
+                                        var newDirective2 = angular.element('<div class="row"><div service-product ng-controller="myController" class="col-md-12" style="height:200px;float:left;"></div></div>');
+                                        
+                                        var element = $("#serviceCollection").prepend(newDirective2);
+                                       // $compile(newDirective2)($scope);
+                                        $compile(newDirective2)($scope);
+                                        //$apply(newDirective)($scope);
+                                       // keepGoing = false;
+                                        //forEach.break;
+                                   // }
+                                //}
+                            
+                            
+                           
                         }),
                     function (error) {
                         //$scope.status = 'Unable to load place data: ' + error.message;
@@ -543,9 +606,12 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
 
 
-            $scope.submit = function () {
+            $scope.submitOne = function () {
                 //$("#userFormPanel").hide();
                 var company = $rootScope.company;
+                angular.element("#serviceForm").hide();
+
+                //$rootScope.i++;
 
                 var PlaceID = company.PlaceId;
 
@@ -557,6 +623,7 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
                 var Name = company.Name;
                 var Address = company.formatted_address;
+                
 
                 //var serviceComments = company.Services;
 
@@ -569,15 +636,18 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                     this.Comments = ["hgtyftyfyft", "hgddjfghgf"];
                 };
                 var Product = new Product();
+                var Products = [];
+                Products.push(Product);
 
                 var Service = function Service() {
                     //this.Id = 1;
                     //this.Name = "KFC";
-                    this.Type = "Food";
-                    this.Description = "Burger";
-                    this.serviceRating = [];
+                    this.Type = "";
+                    this.Description = "";
+                    //this.serviceRating = [];
                     this.serviceComments = [];
                     this.Name = $scope.serviceName;
+                    this.serviceRating = [];
                     //this.serviceRating = company.Services;
                     this.serviceRating.push($scope.last_value);
                     this.serviceComments.push($scope.userComment);
@@ -587,18 +657,8 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                 var Services = company.Services;
                 Services.push(Service);
 
-                //var obje = function Comment() {
-                //    this.Author = "X";
-                //    this.Text = "very Nice";
-                //};
-
-
-                //var Comment = new obje();
-
-
-
                 company = {
-                    "PlaceId": PlaceID, "Name": Name, "Rating": Rating, "Comments": ["", "", "", "", ""], "UsersComments": [5], "Department": null, "Product": Product, "Services": Services
+                    "PlaceId": PlaceID, "Name": Name, "Rating": Rating, "Comments": ["", "", "", "", ""], "UsersComments": [5], "Department": null, "Products": Products, "Services": Services
                 };
 
                 $rootScope.company = company;
@@ -611,11 +671,11 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                             //$scope.places = data;
                             console.log(data);
                             data = $.parseJSON(data.data);
-                            services = data.Services;
+                            var services = data.Services;
 
                             $scope.services = services;
                             var keyIterate = 0;
-                            var serviceIterate = '';
+                            var serviceIterateNew = '';
 
                             //$scope.panelValue.length = 0;
                             //$scope.panelService.length = 0;
@@ -623,18 +683,21 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
                             angular.forEach(services, function (service, key) {
 
-                                keyIterate = key;
-                                serviceIterate = service;
+                                
+                                    keyIterate = key;
+                                    serviceIterateNew = service;
+                                
 
                             });
 
                             //$rootScope.i = 0;
                             //var panelIterator = 
+                            //serviceIterate = services[length - 1];
 
                             $scope.panelValue.push($rootScope.i);
                             //$scope.panelVal = $scope.panelValue[$rootScope.i];
-                            $scope.panelService.push(serviceIterate);
-                            var newDirective = angular.element('<div service-product ng-controller="myController" style="height:200px;"></div>');
+                            $scope.panelService.push(serviceIterateNew);
+                            var newDirective = angular.element('<div class="row"><div service-product ng-controller="myController" class="col-md-12" style="height:200px;float:left;"></div></div>');
                             var element = $("#serviceCollection").prepend(newDirective);
                             $compile(newDirective)($scope);
 
@@ -647,52 +710,17 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                 }
             };
 
+            $scope.serviceAdding = function () {
+                angular.element("#serviceForm").show();
+                //angular.element("#incept").;
+            };
+
             //var element = document.querySelector('[ng-form]');
             $scope.submitSearch = function (query) {
                 //alert("ghfghfhfghfjfgfdfjghghf");
                 localSearch(query);
             };
-            //angular.element('#pac-input').blur( function (event) {
-
-
-
-            //   //var handle = function( event ) {
-            //   //     var ret,
-            //   //             target = this,
-            //   //             related = event.relatedTarget,
-            //   //             handleObj = event.handleObj;
-            //   //     // For mousenter/leave call the handler if related is outside the target.
-            //   //     // NB: No relatedTarget if the mouse left/entered the browser window
-            //   //     //if ( !related || (related !== target && !jQuery.contains( target, related )) ) {
-            //   //         event.type = handleObj.origType;
-            //   //         ret = handleObj.handler.apply( this, arguments );
-            //   //         //event.type = fix;
-            //   //     //}
-            //   //     return ret;
-            //   // }
-
-
-            //   //var y = 0;
-            //   //if (event.which === 13) {
-            //       //handle(event);
-                   
-            //       //var handleObj = event.handleObj;
-            //       //event.type = handleObj.origType;
-            //       //handleObj.handler.apply(this);
-            //       //y++;
-
-            //       //if(y == 1)
-            //            var query = angular.element("#pac-input").val().toString();
-            //       //$scope.$apply(function () {
-                        
-                            
-            //            //});
-                        
-                        
-
-            //   //}
-            //        $scope.submitSearch(query);
-            //    });
+            
             $scope.userCreatedSubmit = function () {
                 
                     var formElements = angular.element();
@@ -718,48 +746,13 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
                             $scope.newCompany = data;
                             angular.element('#newCompany').html($scope.newCompany);
-                            //var keyIterate = 0;
-                            //var serviceIterate = '';
-
-                            //$scope.panelValue.length = 0;
-                            //$scope.panelService.length = 0;
-                            //var panelVal = Math.max($scope.panelValue);
-
-                            //angular.forEach(services, function (service, key) {
-
-                            //    keyIterate = key;
-                            //    serviceIterate = service;
-
-                            //});
-
-                            ////$rootScope.i = 0;
-                            ////var panelIterator = 
-
-                            //$scope.panelValue.push($rootScope.i);
-                            ////$scope.panelVal = $scope.panelValue[$rootScope.i];
-                            //$scope.panelService.push(serviceIterate);
-                            //var newDirective = angular.element('<div service-product ng-controller="myController" style="height:200px;"></div>');
-                            //var element = $("#serviceCollection").prepend(newDirective);
-                            //$compile(newDirective)($scope);
-
-
+                           
                         }),
                     function (error) {
                         //$scope.status = 'Unable to load place data: ' + error.message;
                     };
                 };
-            
-
-            
-                
-                
-
-            
-            
-
-
-
-
+           
         }
     
             

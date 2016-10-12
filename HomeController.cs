@@ -39,7 +39,11 @@ namespace GoogleMapMongoDb.Controllers
         [HttpPost]
         public JsonResult GoogleComments([Bind(Prefix = "")][FromBody]string PlaceID) {
 
-            HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("https://maps.googleapis.com/maps/api/place/details/json?placeid="+PlaceID+"&key=AIzaSyCHPYRyZylQZ9WW2dJZoawaSQVeAGKOm-8");
+            HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("https://maps.googleapis.com/maps/api/place/details/json?placeid="+PlaceID+"&key=AIzaSyB_Yjn7IMjwYQX7xLXqyQKDCYpUP7Q7mac");
+
+            //HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + PlaceID + "&key=AIzaSyCHPYRyZylQZ9WW2dJZoawaSQVeAGKOm-8");
+
+
             //HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4&key=YOUR_API_KEY");
             WebResponse myResponse = myRequest.GetResponse();
             StreamReader sr = new StreamReader(myResponse.GetResponseStream(), System.Text.Encoding.UTF8);
@@ -158,6 +162,12 @@ namespace GoogleMapMongoDb.Controllers
     }
 
     [HttpGet]
+    public ActionResult indexshootra()
+    {
+        return View();
+    }
+
+    [HttpGet]
     public ActionResult BootstrapIndex()
     {
         return View();
@@ -168,7 +178,7 @@ namespace GoogleMapMongoDb.Controllers
     {
         if (!String.IsNullOrEmpty(placeID))
         {
-            HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeID + "&key=AIzaSyCHPYRyZylQZ9WW2dJZoawaSQVeAGKOm-8");
+            HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("https://maps.googleapis.com/maps/api/place/details/json?placeid="+placeID+"&key=AIzaSyB_Yjn7IMjwYQX7xLXqyQKDCYpUP7Q7mac");
             //HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4&key=YOUR_API_KEY");
             WebResponse myResponse = myRequest.GetResponse();
             StreamReader sr = new StreamReader(myResponse.GetResponseStream(), System.Text.Encoding.UTF8);

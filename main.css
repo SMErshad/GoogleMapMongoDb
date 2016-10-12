@@ -178,16 +178,16 @@
 
 .search{
   position: absolute;
-  top: 20px;
+  /*top: 20px;*/
   right: 0;
   z-index: 1;
 }
 
 .search i{
-  color: #9b1414;
+  color: darkgreen;
   cursor: pointer;
-  position: absolute;
-  right: 10px;
+  position: relative;
+  right: 1px;
   top: 2px;
 }
 
@@ -252,11 +252,7 @@
   background: none;
 }
 
-#header .navbar {
-  background: #fff;
-  border: 0;
-  margin-bottom: 0;
-}
+
 
 #header .navbar-toggle{
   margin-top: 20px;
@@ -537,7 +533,7 @@ ul.sub-menu {
 *******Home Page******
 **************************/
 #home-slider {
-  background: url(../images/home/slider-bg.png) 0 100% repeat-x;
+  /*background: url(../images/home/slider-bg.png) 0 100% repeat-x;*/
   position: relative;
 }
 
@@ -1466,10 +1462,6 @@ Portfolio Details
   margin-top: 10px;
 }
 
-.navbar-default {
-  background: none;
-  padding: 0;
-}
 
 .navbar-default li a{
   font-size: 12px;
@@ -2736,17 +2728,22 @@ div #md-form-input {
     text-align:center;
 }
 div #companyUserComment {
-    background-color:#274125;
+    background-color:#e0dcdc;
 }
 div #block {
     /*background-color:#0a280e;*/
-    color:white;
+    color:black;
 }
 div #commentPublish {
 
     /*background-color:#113b15;*/
-    color:white;
+    color:black;
 }
+
+.serviceDetails {
+    word-wrap:break-word;
+}
+
 
 /*div #follow {
   -moz-box-shadow:    10px 5px 5px 6px #2d3930;

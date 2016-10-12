@@ -22,6 +22,19 @@
                 });
                 return http;    
         };
+        dataFactory.userCreatedCompany = function (company) {
+            //var company = $rootScope.company;
+            //var data = $.param({
+            //    company: company
+            //});
+            var http = $http({
+                method: 'POST',
+                url: '../ServiceProduct/UserCreatedCompany',
+                traditional: true,
+                data: company
+            });
+            return http;
+        };
 
 
         dataFactory.googleComments = function (PlaceID) {
@@ -91,12 +104,12 @@
             return http;
         };
 
-        dataFactory.searchLocal = function (query) {
+        dataFactory.searchLocal = function (result) {
             var http = $http({
                 method: 'POST',
                 url: '../Search/SearchLocal',
 
-                data: JSON.stringify(query),
+                data: JSON.stringify(result),
                 dataType: "json"
             });
             return http;

@@ -21,13 +21,14 @@ myApp
                         i++;
                         //scope.i = i;
                         $rootScope.i = i;
+                        $rootScope.serveEdit = scope.service.Name;
                         //scope.i = i;
                
                         //$("#service-details").append('<strong>Service/Product:</strong> ' + scope.service.Name + '<br>' + '<i class="fa fa-commenting"></i> ' + scope.service.serviceComments + '</br></br>');
                         scope.serviceDetails = '<strong>Service/Product:</strong> ' + scope.service.Name + '<br>' + '<i class="fa fa-commenting"></i> ' + scope.service.serviceComments + '</br></br>';
                
-                        scope.last_value = scope.service.serviceRating;
-                        var starDirective = angular.element('<input-stars max="5" class="col-md-12" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="last_value" ></input-stars>');
+                        scope.last_value_one = scope.service.serviceRating;
+                        var starDirective = angular.element('<input-stars max="5" class="col-md-12" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="last_value_one" ></input-stars>');
                         angular.element(".serviceRating").append(starDirective);
                         //var stars = '<input-stars max="5" class="col-md-12" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="scope.last_value"></input-stars>';
                         
@@ -51,7 +52,7 @@ myApp
             //template: '<div class="col-md-6"><div class="panel panel-success"><div class="panel-heading" role="tab" id="headingOne"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Service/Product Title</a></h4></div><div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"><div class="panel-body" id="commentPublish"><p class="col-md-5 service-details"></p><span class="col-md-7 serviceRating" ng-model="serviceRating" style="float:right;"></span></div></div></div></div>',
             //template: '<ng-include src="getTemplate()"></ng-include>',
             template:'' ,
-            //replace: true,
+            replace: true,
             //transclude: true,
             controller: 'myController',
             link: link

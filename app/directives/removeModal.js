@@ -15,7 +15,7 @@
                     scope.$eval(attrs.removeModal);
                     
                     scope.userCreatedSubmit();
-                    $window.location.href = "EditPlace";
+                    $window.location.href = "BootstrapIndex";
                     var modal = document.getElementsByClassName("modal-backdrop");
                     var body = document.getElementsByTagName("body");
 

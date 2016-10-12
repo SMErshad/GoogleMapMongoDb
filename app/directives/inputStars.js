@@ -5,7 +5,7 @@
         var directive = {
 
             restrict: 'EA',
-            replace: true,
+            //replace: true,
             template: '<ul ng-class="listClass">' +
             '<li style="height:20px;" ng-touch="paintStars($index)" ng-mouseenter="paintStars($index, true)" ng-mouseleave="unpaintStars($index, false)" ng-repeat="item in items track by $index">' +
             '<i  ng-class="getClass($index)" ng-click="setValue($index, $event)"></i>' +

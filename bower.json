@@ -1,0 +1,31 @@
+{
+  "name": "ASP.NET",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "*",
+    "bootstrap-touch-carousel": "0.8.0",
+    "hammer.js": "2.0.4",
+    "jquery": "*",
+    "jquery-validation": "1.11.1",
+    "jquery-validation-unobtrusive": "3.2.2",
+    "angular": "*",
+    "angular-route": "*",
+    "angular-resource": "*",
+    "angular-material": "*",
+    "angular-animate": "*",
+    "angular-bootstrap": "*",
+    "angular-google-maps": "*",
+    "angular-motion": "0.4.3",
+    "angular-input-stars": "1.5.5",
+    "angular-sanitize": "*",
+    "angular-scroll-animate": "*",
+    "angular-inview": "1.5.6",
+    "angular-advanced-searchbox": "*",
+
+    "angular-tooltips": "*",
+    "angular-google-places-autocomplete": "*"
+  },
+  "resolutions": {
+    "angular": ">=1.4.0"
+  }
+}

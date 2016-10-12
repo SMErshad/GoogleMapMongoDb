@@ -8,40 +8,37 @@
             var map, infoWindow;
             var markers = [];
             $rootScope.flag1 = false;
-            //var company = "";
-            //$rootScope.company = company;
-        
-            // map config
-            var mapOptions = {
-                center: new google.maps.LatLng(50, 2),
-                zoom: 4,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                scrollwheel: false
-            };
-        
-            // init the map
-            function initMap() {
+           
+            scope.initMap = function () {
+
                 var map = new google.maps.Map(document.getElementById('map'), {
-                    center: { lat: -33.8688, lng: 151.2195 },
-                    zoom: 10
-                });
+                    center: { lat: 23.873431, lng: 90.389977 },
+                    zoom: 15
+                });                
 
                 var input = document.getElementById('pac-input');
-                //scope.$apply(function () {
-                    var autocomplete = new google.maps.places.Autocomplete(input);
-                //});
                 
-                autocomplete.bindTo('bounds', map);
+                var autocomplete = new google.maps.places.Autocomplete(input);
+               
+                    autocomplete.bindTo('bounds', map);
 
-                map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-                scope.infowindow = new google.maps.InfoWindow();
-                scope.marker = null;
+                    scope.infowindow = new google.maps.InfoWindow();
+                    
+                    autocomplete.addListener('place_changed', function () {
+                       
+                        $('#mapMovesIn').prepend($('#incept'));
+                        $('#gplace').detach();
+                        $('#incept').removeClass('col-sm-12');
+                        $('#incept').addClass('col-sm-6');
+                  
 
-                autocomplete.addListener('place_changed', function () {
-                    //flag = true;
-                    $rootScope.flag1 = true;
-                    scope.infowindow.close();
+                    var flag = true;
+                    //$rootScope.flag1 = true;
+                    scope.placeName = scope.searchMap;
+                    angular.element('#placeName span').append(scope.placeName);
+                    //scope.infowindow.close();
                     var place = autocomplete.getPlace();
                     if (!place.geometry) {
                         return;
@@ -76,11 +73,8 @@
                             location: place.geometry.location
                         });
 
-                        
-                    
                     scope.marker.setVisible(true);
 
-                    google.maps.event.addListener(scope.marker, 'click', function () {
                         htmlBoth = '<br>';
 
                         var placeID = place.place_id;
@@ -105,14 +99,16 @@
                             this.Comments = ["hgtyftyfyft", "hgddjfghgf"];
                         };
                         var Product = new Product();
+                        var Products = [];
+                        Products.push(Product);
 
                         var Service = function Service() {
                             //this.Id = 1;
                             this.Name = "KFC";
                             this.Type = "Food";
                             this.Description = "Burger";
-                            //this.serviceRating = [];
-                            this.serviceRating = ["4.3"];
+                            this.serviceRating = [];
+                            this.serviceRating.push(4.3);
                             this.serviceComments = ["hgtyftyfyft", "hgddjfghgf"];
                         };
 
@@ -134,7 +130,7 @@
 
                         
                        var company = {
-                            "PlaceId": PlaceId, "Name": Name, "Rating": Rating, "Comments": ["", "", "", "", ""], "UsersComments": [5], "Department": null, "Product": Product, "Services": Services
+                            "PlaceId": PlaceId, "Name": Name, "Rating": Rating, "Comments": ["", "", "", "", ""], "UsersComments": [5], "Department": null, "Products": Products, "Services": Services
                        };
 
 
@@ -145,6 +141,8 @@
 
                        scope.infowindow.open(map, scope.marker);
                         //$rootScope.company = company;
+
+                       $("#follow").show();
                        
 
                         //var elem = angular.element(document.querySelector('[ng-app=myApp]'));
@@ -161,19 +159,23 @@
                             $rootScope.flag1 = true;
                             $rootScope.infowindow = scope.infowindow;
                             $rootScope.marker = scope.marker;
+                            $rootScope.i = 0;
+                            $rootScope.serveEdit = null;
                         });
 
 
                         scope.globe.start();
                          
-                    });
+                    //});
                 });
             }
 
         
             // show the map and place some markers
-            
-            initMap();
+           //if ($("#home-slider").is(':visible')) {
+               scope.initMap();
+           //}
+           //google.maps.event.addDomListener(window, "load", scope.initMap());
             
         };
     
