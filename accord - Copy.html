@@ -1,0 +1,40 @@
+﻿<div id="commentPublishPanelDiv{{panelVal}}">
+    <div class="panel panel-success" >
+        <div class="panel-heading" role="tab" id="heading{{panelVal}}" style="background-color:#c9e1c9">
+            <h4 class="panel-title">
+                <a role="button"  data-toggle="collapse" data-parent="#accordion" href="#collapse{{panelVal}}" aria-expanded="true" aria-controls="collapse{{panelVal}}">
+                    {{service.Name}}
+                </a>
+            </h4>
+        </div>
+        <div id="collapse{{panelVal}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{panelVal}}"  style="background-color:#efefef;">
+            <div class="row panel-body" id="commentPublish" >
+                <div class="row" style="height:10px;"></div>
+                    <div class="row" style="padding-left:10px;color:darkgreen;">
+                        <div class="col-md-6 serviceDetails" ng-bind-html="serviceDetails" id="service-details"></div>
+                        <div class="col-md-6" style="float:right;">
+                            <div style="float:left" class="serviceRating" id="serviceRating{{panelVal}}">                                
+                            </div>
+                            <button style="float:left" id="{{service.Name}}" ng-click="serveComments()">View Details</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6" id="userService{{panelVal}}">
+                            <p>
+                                <a class="btn btn-primary" id="openFormOldAll{{panelVal}}" ng-href="#commentPublishPanelDiv" ng-click="openFormOld()"><font color="white"><i class="fa fa-comment-o"></i>&nbsp;&nbsp;Please Add Comment</font></a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                       
+                        <div class="col-md-1"></div>
+                        <!-- <div class="row" style="height:20px;"></div>-->
+                    </div>
+
+                </div>
+             </div>
+            
+        </div>
+    </div>

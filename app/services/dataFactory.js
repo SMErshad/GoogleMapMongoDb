@@ -7,7 +7,22 @@
         var company = $rootScope.company;
         var place = $rootScope.place;
         //var Name = $rootScope.Name;
+        //var placeID = $rootScope.placeID;
 
+        dataFactory.getCompany = function (placeID) {
+            //var company = $rootScope.company;
+            //var data = $.param({
+            //    company: company
+            //});
+            var http = $http({
+                method: 'POST',
+                url: '../Home/GetCompany',
+                //traditional: true,
+                data: JSON.stringify(placeID),
+                dataType: "json"
+            });
+            return http;
+        };
 
         dataFactory.serviceProduct = function (company) {
             //var company = $rootScope.company;

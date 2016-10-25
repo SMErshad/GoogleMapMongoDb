@@ -228,11 +228,12 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                 console.log("Fun times have been started!");
 
                 if (company != null && place != null) {
-
-                    dataFactory.googleComments(place.place_id)
+                    $scope.companyPlaceId = place.place_id;
+                    dataFactory.googleComments($scope.companyPlaceId)
                            .then(function (data) {
                                console.log(data);
                                result = $.parseJSON(data.data).result;
+                               $scope.companyRevivesGoogle = result;
                                reviews = result.reviews;
                                var CommentsArray = [];
                                var htmlBoth = "";
@@ -275,6 +276,8 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                                        .then(function (response) {
                                            console.log(response);
                                            var result = $.parseJSON(response.data);
+                                           $scope.companyRevivesLocal = result;
+                                           $rootScope.company.Services = result.Services;
                                            var reviews = result.Comments;
                                            var ourReviews = result.UsersComments;
                                            //userComment = dataa.userComment;
@@ -349,6 +352,97 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                 }
             };
 
+            $scope.companyReviveClick = function () {
+
+
+
+                var result = $scope.companyRevivesGoogle;
+
+                reviews = result.reviews;
+                var CommentsArray = [];
+                var htmlBoth = "";
+                $scope.googleComments = [];
+
+                //htmlBoth += "<div>";
+                if (reviews != undefined) {
+                    $.each(reviews, function (index, item) {
+                        console.log("GoogleComment[" + index + "]: " + item.text);
+                        $scope.googleComments.push(item.text);
+
+
+
+                        //htmlBoth += "GoogleComment[" + index + "]: " + item.text + "<br>";
+                        CommentsArray.push(item.text);
+                    });
+
+
+                    //var x = $("#mdCommentsAnimated");
+                    //angular.forEach($scope.googleComments, function (item, index) {
+                    var newAnimatedDirective = angular.element('<div ng-repeat="car in googleComments" bind-scroll-to=".animatedDiv" when-visible="animateElementIn" class="car-container"><div class="car panel-body" id="commentPublish" style="color:black"><i class="fa fa-quote-left" style="color:green;font-size:10px;"></i>&nbsp;{{car}}&nbsp;<i class="fa fa-quote-right" style="color:green;font-size:10px;"></i></div></div>');
+                    var element = $("#animatedDiv").prepend(newAnimatedDirective);
+                    $compile(newAnimatedDirective)($scope);
+                    $("#serviceShowUp").hide();
+                    $('#animatedDivServices').hide();
+                    $("#jRateFinal").show();
+                    $("#md-user-input").show();
+                    $("#animatedDiv").show();
+                    //});
+
+
+
+
+
+                    company.Comments = new Array();
+                    for (var i = 0; i < CommentsArray.length; i++) {
+                        company.Comments.push(CommentsArray[i]);
+                    };
+
+
+
+
+
+
+                }
+
+
+                result = $scope.companyRevivesLocal;
+                var reviews = result.Comments;
+                var ourReviews = result.UsersComments;
+                //userComment = dataa.userComment;
+                //htmlBoth += "<br><strong>Recent Comment: " + userComment + "</strong><br>";
+
+
+                console.log(reviews);
+                console.log(ourReviews);
+                console.log(response);
+                //result = $.parseJSON(response);
+
+                //userComment = response.userComment;
+                //htmlBoth += "<br><strong>Recent Comment: " + userComment + "</strong><br>";
+                $scope.ourComments = [];
+
+                if (ourReviews.length > 0) {
+                    $.each(ourReviews, function (index, item) {
+                        console.log("OurComment[" + index + "]: " + item);
+                        $scope.ourComments.push(item);
+                        //CommentsArray.push(item);
+                        htmlBoth += "<br><strong>OurComment[" + index + "]:</strong> " + item + "<br>";
+
+                    });
+                }
+
+                $scope.ourComments.reverse();
+
+                if ($scope.ourComments.length > 0) {
+
+                    var newOurCommentAnimatedDirective = angular.element('<div ng-repeat="car in ourComments" bind-scroll-to=".animatedDiv" when-visible="animateElementIn"   class="car-container"><div class="car panel-body" id="commentPublish" style="color:black"><i class="fa fa-quote-left" style="color:green;font-size:10px;"></i>&nbsp;{{car}}&nbsp;<i class="fa fa-quote-right" style="color:green;font-size:10px;"></i></div></div>');
+                    var element = $("#animatedDiv").prepend(newOurCommentAnimatedDirective);
+                    $compile(newOurCommentAnimatedDirective)($scope);
+
+                }
+
+            }
+
 
             $scope.addUserComment = function () {
                 var place = $rootScope.place;
@@ -408,32 +502,74 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
 
             $scope.serveComments = function () {
-                $("#jRateFinal").hide();
-                $("#md-user-input").hide();
-                var serveName = $rootScope.serveEdit;
+                if ($('#serviceShowUp').css("display") == 'none') {
+                    $("#jRateFinal").hide();
+                    $("#md-user-input").hide();
+                    $('#serviceShowUp').children().remove();
+                    //$("#pac-input").val();
+                   
+                }
+                else {
+                    //$("#serviceShowUp").hide();
+                    //$('#serviceShowUp').fadeToggle('fast');
+                    $('#serviceShowUp').children().remove();
+                }
 
-                var company = $rootScope.company;
-                var services = company.Services;
-                var comms = [];
-                angular.forEach(services, function (service, key) {
-                    if (service.Name == serveName) {
-                        comms.push(service.serviceComments);
-                        $scope.comms = comms;
+                        var serveNameEach = $scope.serveEditEach;
 
-                        $("#animatedDiv").hide();
+                        var company = $rootScope.company;
+                        var services = [];
+                        var services = company.Services;
+                        //var comments = [];
+                        $scope.comms = [];
 
-                        //angular.forEach($scope.comms, function (car, key) {
+                        angular.forEach(services, function (service, key) {
+                            if (service.Name == serveNameEach) {
 
-                            var newAnimatedDirective = angular.element('<div ng-repeat="car in comms" bind-scroll-to=".animatedDiv" when-visible="animateElementIn" class="car-container"><div class="car panel-body" id="commentPublish" style="color:black"><i class="fa fa-quote-left" style="color:green;font-size:10px;"></i>&nbsp;{{car}}&nbsp;<i class="fa fa-quote-right" style="color:green;font-size:10px;"></i></div></div>');
-                            var element = $("#animatedDivServices").prepend(newAnimatedDirective);
-                            $compile(newAnimatedDirective)($scope);
+                                $scope.last_value_service = service.serviceRating;
+                                var inputStars = angular.element('<input-stars max="5" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="last_value_service"></input-stars>');
+                                $compile(inputStars)($scope);
+                                var element1 = $("#serviceShowUp").append('<div class="col-sm-4" style="height:40px;text-align:center;">' + service.Name + '</div>');
+                                var x = angular.element('<div class="col-sm-6" style="height:40px;"></div>');
 
-                        //});
-                    }
-                    
-                });
+                                x.append(inputStars);
+                                var element2 = $("#serviceShowUp").append(x);
+
+                                $("#serviceShowUp").show();
+                                $("#serviceOrCompanyName").empty();
+                                $("#serviceOrCompanyName").append("of ");
+
+                                $("#serviceOrCompanyName").append(service.Name + " : ");
+                                $("#companyName").hide();
+                                $("#companyName").empty();
+                                $("#companyName").append("at ");
+                                $("#companyName").append(company.Name);
+                                $("#companyName").show();
+                                $('#animatedDivServices').empty();
 
 
+                                angular.forEach(service.serviceComments, function (comment, index) {
+
+                                    $scope.comms.push(comment);
+                                });
+                                //$scope.comms.push(service.serviceComments);
+                                //$scope.comms = comments;var eleme
+
+                                $("#animatedDiv").hide();
+
+                                //angular.forEach($scope.comms, function (car, key) {
+
+                                var newAnimatedDirective = angular.element('<div ng-repeat="car in comms" bind-scroll-to=".animatedDivServices" when-visible="animateElementIn" class="car-container"><div class="car panel-body commentPublish" style="color:black"><i class="fa fa-quote-left" style="color:green;font-size:10px;"></i>&nbsp;{{car}}&nbsp;<i class="fa fa-quote-right" style="color:green;font-size:10px;"></i></div></div>');
+                                var element = $("#animatedDivServices").prepend(newAnimatedDirective);
+                                $compile(newAnimatedDirective)($scope);
+                                $('#animatedDivServices').show();
+
+                                //});
+                            }
+
+                        });
+                    //});
+              
             };
 
 

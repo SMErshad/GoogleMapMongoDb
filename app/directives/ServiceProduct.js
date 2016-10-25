@@ -22,6 +22,7 @@ myApp
                         //scope.i = i;
                         $rootScope.i = i;
                         $rootScope.serveEdit = scope.service.Name;
+                        scope.serveEditEach = scope.service.Name;
                         //scope.i = i;
                
                         //$("#service-details").append('<strong>Service/Product:</strong> ' + scope.service.Name + '<br>' + '<i class="fa fa-commenting"></i> ' + scope.service.serviceComments + '</br></br>');

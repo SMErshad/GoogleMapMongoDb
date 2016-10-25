@@ -15,7 +15,8 @@
             scope: {
                 last_value: '=',
                 setValue: '&',
-                last_value_one: '='
+                last_value_one: '=',
+                last_value_service: '=',
             },
 
             link: link
@@ -100,8 +101,10 @@
                     scope.last_value = index + 1;
                 }
                 scope.last_value_one = scope.last_value;
+                scope.last_value_service = scope.last_value;
                 ngModelCtrl.$setViewValue(scope.last_value);
                 ngModelCtrl.$setViewValue(scope.last_value_one);
+                ngModelCtrl.$setViewValue(scope.last_value_service);
                 //console.log(scope.last_value);
                 //return scope.last_value;
             };
