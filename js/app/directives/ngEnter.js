@@ -29,7 +29,7 @@
                                     scope.submitSearch(scope.searchMap);
                                 }                                
                             }
-                        }, 3000);
+                        }, 1000);
                     }, true);
                 
                 });

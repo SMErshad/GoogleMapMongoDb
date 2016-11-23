@@ -1,0 +1,37 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    // ViewBag.Title = "Home Page";
+}
+
+@*<header id="header" style="">
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <h2 style="position: relative;top: -10px;font-weight: bold;">Shootro</h2>
+                </a>
+            </div>
+        </div>
+    </nav>
+   
+</header>*@
+
+<div class="row">
+    <div class="row" ng-controller="myController" style="height:{{winHeighthalf}}px;"></div>
+
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            @*<input id="pac-input" ng-model="searchMap" ng-enter name="pac-input" class="controls" type="text" placeholder="Enter a location" />*@
+
+            <h6>Shootra</h6>
+            <input id="autocomplete" type="text" name="field1" class="field-divided" g-places-autocomplete ng-model="myScopeVar" size="70" placeholder="Enter a location" />
+
+
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>

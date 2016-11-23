@@ -1,11 +1,65 @@
 ﻿
 
 
-    <div class="row">
-        <div class="modal-body col-md-12" style="height:450px;">
-            <div service-comment class="row" style="height:450px;"></div>
+
+
+<div class="row">
+    <div class="modal-body col-md-12" style="height:500px;">
+        <div class="col-md-12" style="height:495px">
+            <div class="panel panel-success" id="modalpanel" style="height:490px;">
+                <div class="panel-heading" role="tab" id="headingA">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseA" aria-expanded="true" aria-controls="collapseA">
+                            Add Comment for <span>{{service.Name}}</span>
+                        </a>
+                        <span ng-click="cancel()" remove-modal style="float:right">x</span>
+                    </h4>
+                </div>
+                <div id="collapseA" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingA">
+                    <div class="panel-body" style="padding-top:0px;">
+                        <!--<p class="col-md-5" ng-bind-html="serviceDetails" id="service-details" style="height:80px;"></p>-->
+                        <!--<span class="col-md-7 serviceRating" style="height:50px;float:right;"></span>-->
+                        <!--<div style="height:30px;float:right;"><p><a id="openFormNewCreation" ng-href="#commentPublishPanelDiv" ng-click="openFormOld()"><font color="green"><i class="fa fa-comment-o"></i> Add a Comment</font></a></p></div>-->
+                        <div class="row">
+                            <div class="col-sm-12" style="background-color:#dff0d8;height:450px;">
+                                <form name="userFormModal" ng-submit="userFormModalSubmit()">
+
+                                    <div class="row" style="margin-top:35px;">
+                                        <div class="form-group col-sm-12">
+                                            <div class="row">
+                                                <div class="col-sm-12" id="rateYoDemo"></div>
+                                            </div>
+                                            <!--<input-stars ng-controller="myController" max="5" class="form-control" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="globe.last_value_user_modal" ></input-stars>-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-12">
+                                            <!-- <label>Add Comment:</label>-->
+                                            <textarea type="text" class="form-control" ng-model="userCommentOldModal" rows="15" placeholder="comment..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <button style="background-color:#c9e1c9;color:darkgreen;" class="btn  form-control" ng-click="cancel()">Cancel</button>
+
+                                         </div>
+                                        <div class="form-group col-sm-6">
+                                            <button href="#" type="submit" class=" btn btn-warning form-control" ng-href="#" ng-click="ok()">Add</button>
+
+                                         </div>
+                                    </div>
+
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
-    
+ </div>
 
 

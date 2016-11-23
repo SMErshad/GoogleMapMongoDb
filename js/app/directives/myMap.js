@@ -8,51 +8,40 @@
             var map, infoWindow;
             var markers = [];
             $rootScope.flag1 = false;
-            //var company = "";
-            //$rootScope.company = company;
-        
-            // map config
-            
-          //var listen = new  google.maps.event.addListenerOnce(map, 'tilesloaded', function () {
-          //      //this part runs when the mapobject is created and rendered
-          //      var listenInside = new google.maps.event.addListenerOnce(map, 'tilesloaded', function () {
-          //          //this part runs when the mapobject shown for the first time
-          //      });
-          //  });
+            var lat = geoip_latitude();
+            var long = geoip_longitude();
+           
+            scope.initMap = function () {
 
-            //var mapOptions = {
-            //    center: new google.maps.LatLng(50, 2),
-            //    zoom: 4,
-            //    mapTypeId: google.maps.MapTypeId.ROADMAP,
-            //    scrollwheel: false
-            //};
-
-        
-            // init the map
-           scope.initMap = function () {
                 var map = new google.maps.Map(document.getElementById('map'), {
-                    center: { lat: -33.8688, lng: 151.2195 },
+                    //center: { lat: 23.873431, lng: 90.389977 },
+                    center: new google.maps.LatLng(lat, long),
                     zoom: 10
-                });
+                });                
 
                 var input = document.getElementById('pac-input');
-                //scope.$apply(function () {
-                    var autocomplete = new google.maps.places.Autocomplete(input);
-                //});
                 
-                autocomplete.bindTo('bounds', map);
+                var autocomplete = new google.maps.places.Autocomplete(input);
+               
+                    autocomplete.bindTo('bounds', map);
 
-                map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-                scope.infowindow = new google.maps.InfoWindow();
-                scope.marker = null;
+                    scope.infowindow = new google.maps.InfoWindow();
+                    
+                    autocomplete.addListener('place_changed', function () {
+                       
+                        $('#mapMovesIn').prepend($('#incept'));
+                        $('#gplace').detach();
+                        $('#incept').removeClass('col-sm-12');
+                        $('#incept').addClass('col-sm-6');
+                  
 
-                autocomplete.addListener('place_changed', function () {
-                    //flag = true;
-                    $rootScope.flag1 = true;
+                    var flag = true;
+                    //$rootScope.flag1 = true;
                     scope.placeName = scope.searchMap;
                     angular.element('#placeName span').append(scope.placeName);
-                    scope.infowindow.close();
+                    //scope.infowindow.close();
                     var place = autocomplete.getPlace();
                     if (!place.geometry) {
                         return;
@@ -87,14 +76,7 @@
                             location: place.geometry.location
                         });
 
-                        
-                    
                     scope.marker.setVisible(true);
-
-                    google.maps.event.addListener(scope.marker, 'click', function () {
-
-
-                        $("#follow").show();
 
                         htmlBoth = '<br>';
 
@@ -102,16 +84,20 @@
 
                         var reviews = [];
                         var CommentsArray = [];
-                        var Rating = parseFloat(place.rating);
+                        var Rating = parseFloat(place.rating);  
                         var userRating = '';
                         //alert(score);
                         var PlaceId = place.place_id;
+                        //$rootScope.placeID = place.place_id;
+                        scope.companyPlaceId = PlaceId;
                         var Name = place.name;
                         var Address = place.formatted_address;
                         var jRateScore = "";
                         var KFC = "KFC";
                         var Food = "Food";
                         var Burger = "Burger";
+                        //var Products = [];
+                        //var Services = [];
 
                         var Product = function Product() {
                             this.Id = 1;
@@ -130,7 +116,8 @@
                             this.Description = "Burger";
                             this.serviceRating = [];
                             this.serviceRating.push(4.3);
-                            this.serviceComments = ["hgtyftyfyft", "hgddjfghgf"];
+                            this.serviceComments = [];
+                            this.serviceComments.push("hgtyftyfyft", "hgddjfghgf");
                         };
 
                         var Service = new Service();
@@ -139,10 +126,10 @@
 
                         
 
-                        var obje = function Comment() {
-                            this.Author = "X";
-                            this.Text = "very Nice";
-                        };
+                        //var obje = function Comment() {
+                        //    this.Author = "X";
+                        //    this.Text = "very Nice";
+                        //};
 
 
                         //var Comment1 = new obje();
@@ -162,6 +149,8 @@
 
                        scope.infowindow.open(map, scope.marker);
                         //$rootScope.company = company;
+
+                       $("#follow").show();
                        
 
                         //var elem = angular.element(document.querySelector('[ng-app=myApp]'));
@@ -179,19 +168,23 @@
                             $rootScope.infowindow = scope.infowindow;
                             $rootScope.marker = scope.marker;
                             $rootScope.i = 0;
+                            $rootScope.serveEdit = null;
+                            $rootScope.placeID = place.place_id;
+                            $rootScope.address = place.formatted_address;
                         });
 
 
                         scope.globe.start();
                          
-                    });
+                    //});
                 });
             }
 
         
             // show the map and place some markers
-            
-           scope.initMap();
+           //if ($("#home-slider").is(':visible')) {
+               scope.initMap();
+           //}
            //google.maps.event.addDomListener(window, "load", scope.initMap());
             
         };
