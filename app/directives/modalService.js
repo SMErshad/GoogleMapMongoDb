@@ -2,23 +2,57 @@
     .directive('modalService', ['$rootScope', '$compile', '$templateRequest', '$q', function ($rootScope, $compile, $templateRequest, $q) {
         // directive link function
 
-        var link = function ($scope, $element, $attrs, myController, $transclude) {
+        var link = function ($scope, $element, $attrs, controller, $transclude) {
 
             //var i = 0;
 
             //angular.forEach(scope.panelService, function (service, k) {
             $templateRequest('../modalService.html').then(function (html) {
 
+                //var template = angular.element(html);
+                //var i = $rootScope.i;
+                var company = $rootScope.company;
+                $scope.services = company.Services;
+                //$scope.service = $scope.services[$scope.serviceIndex];
+                //$scope.panelVal = $scope.panelValue[i];
+                //$scope.service = $scope.panelService[i];
                 var template = angular.element(html);
+                // Append it to the directive element
+                //element.append(template);
+
+                //i++;
+                ////scope.i = i;
+                //$rootScope.i = i;
 
                 $element.append(template);
                 $scope.$eval($attrs.modalService);
+                $scope.$eval($attrs.inputStars);
+                $compile(template)($scope);
+
+                $('#rateYoDemo').rateYo({
+                    rating: 3.6,
+                    starWidth: "25px",
+                    ratedFill: "green",
+                    precision: 2,
+                    onSet: function (rating, rateYoInstance) {
+
+                        $scope.rateYoDemo = rating;
+                    }
+                });
+
+                //$scope.$watch(function () {
+                //    return $scope.last_value_user_modal;
+                //}, function (value) {
+                //    console.log(value);
+                //});
+
+          
                 //$scope.$apply(function () {
                 //$scope.searchMap = angular.element('#pac-input').val();
                 
-                $compile(template)($scope);
                 
-            });
+               
+              });
         }
 
         return {

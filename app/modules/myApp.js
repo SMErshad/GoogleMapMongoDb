@@ -1,6 +1,6 @@
 ﻿
         // Include the dependency upon ngMaterial - important !!
-var myApp = angular.module('myApp', ['ui.bootstrap', 'ngAnimate', 'ngSanitize', 'angular-scroll-animate', '720kb.tooltips', 'google.places']);
+var myApp = angular.module('myApp', ['ui.bootstrap', 'ngAnimate', 'ngSanitize', 'angular-scroll-animate', 'google.places']);
         //          .config(
 
         //              myApp.config(['$routeProvider', function ($routeProvider) {

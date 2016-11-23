@@ -1,14 +1,14 @@
-﻿myApp.controller('ModalInstanceCtrl1', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+﻿myApp.controller('ModalInstanceCtrl1', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance, userCommentOldModal, last_value_user_modal) {
 
-    //$scope.items = items;
-    //$scope.selected = {
-    //  item: $scope.items[0]
-    //};
-    var self = this;
+    $scope.userCommentOldModal = userCommentOldModal;
+    $scope.last_value_user_modal = last_value_user_modal;
+    //var self = this;
+    //$scope.ok;
 
     $scope.ok = function () {
-        //$uibModalInstance.close();
+        $uibModalInstance.close();
     };
+   
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');

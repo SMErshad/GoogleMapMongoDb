@@ -10,7 +10,7 @@
             $templateRequest('../serviceComment.html').then(function (html) {
 
                 //var offset = angular.element('#pac-input').offset();
-                //var left = offset.left;
+                //var left = offset.lseft;
                 //var top = offset.top;
                 //var modalTop = top + angular.element('#pac-input').height() + 5;
                 //angular.element($element.children()[1]).offset({ top: top, left: modalTop });
@@ -18,6 +18,11 @@
                 var template = angular.element(html);
                 // Append it to the directive element
                 $scope.$eval($attrs.serviceComment);
+
+                //$scope.$watch($scope.ok());
+                //$scope.$watch($scope.cancel());
+
+                 
                 //$scope.$eval(searchMap);
                 //$scope.$apply(function () {
                 //$scope.searchMap = angular.element('#pac-input').val();

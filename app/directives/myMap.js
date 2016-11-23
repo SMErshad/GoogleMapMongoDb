@@ -16,7 +16,7 @@
                 var map = new google.maps.Map(document.getElementById('map'), {
                     //center: { lat: 23.873431, lng: 90.389977 },
                     center: new google.maps.LatLng(lat, long),
-                    zoom: 15
+                    zoom: 10
                 });                
 
                 var input = document.getElementById('pac-input');

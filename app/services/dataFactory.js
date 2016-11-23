@@ -24,6 +24,17 @@
             return http;
         };
 
+        dataFactory.updateServiceProduct = function (company) {
+
+            var http = $http({
+                method: 'POST',
+                url: '../ServiceProduct/UpdateServiceProduct',
+                traditional: true,
+                data: company
+            });
+            return http;
+        };
+
         dataFactory.serviceProduct = function (company) {
             //var company = $rootScope.company;
             //var data = $.param({
