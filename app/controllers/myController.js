@@ -11,13 +11,7 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
     //$scope.searchMap;
 
     var self = this;
-    $scope.rating = {};
-    $scope.rating.rating1 = 5;
-    $scope.rating.rating2 = 2;
-    $scope.rating.isReadonly = true;
-    $scope.rating.rateFunction = function (rating) {
-        console.log('Rating selected: ' + rating);
-    };
+    
 
     $scope.animateElementIn = function ($el) {
         $el.removeClass('hidden');
@@ -167,6 +161,9 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
         angular.element("#addServiceButton").show();
 
+
+
+
         var company = $rootScope.company;
         var place = $rootScope.place;
         var placeID = place.place_id;
@@ -194,8 +191,21 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
                 $scope.last_value_company = rating;
                 $scope.inputStarChanges();
-                $("#animatedCommentsDiv").hide();
+                //$("#animatedCommentsDiv").hide();
             }
+        });
+
+        $('document').ready(function () {
+            $('#rateYoDemoBoot').rateYo({
+                rating: 5.0,
+                starWidth: "25px",
+                ratedFill: "yellow",
+                precision: 2,
+                onSet: function (rating, rateYoInstance) {
+
+                    $scope.rateYoDemoBoot = rating;
+                }
+            });
         });
         //var inputStarsCompany = '<div class="row"><div class="col-sm-12" id="rateYoDemoCompany"></div></div>';
         ////$compile(inputStarsCompany)($scope);
@@ -247,7 +257,8 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
         if (company != null && place != null) {
             $scope.companyPlaceId = place.place_id;
-            $("#companyName").append(' >> ' + company.Name);
+            $("#companyName").append('<strong> ' + company.Name + '</strong>');
+            $("#companyNameForService").append('Products/Services of ' + company.Name);
             dataFactory.googleComments($scope.companyPlaceId)
                    .then(function (data) {
                        console.log(data);
@@ -280,7 +291,7 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
 
 
-                           company.Comments = new Array();
+                           company.Comments = [];
                            for (var i = 0; i < CommentsArray.length; i++) {
                                company.Comments.push(CommentsArray[i]);
                            };
@@ -296,7 +307,7 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                                    console.log(response);
                                    var result = $.parseJSON(response.data);
                                    $scope.companyRevivesLocal = result;
-                                   $rootScope.company.Services = result.Services;
+                                   //$rootScope.company.Services = result.Services;
                                    var reviews = result.Comments;
                                    var ourReviews = result.UsersComments;
                                    //userComment = dataa.userComment;
@@ -338,12 +349,15 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                                    //$("#md-comments").append(htmlBoth);
                                    var services = result.Services;
 
-                                   $scope.panelVal = [];
+                                   //$scope.panelVal = [];
                                    //$scope.serviceIndex = null;
-                                   $scope.panelValue = [];  
-                                   $scope.panelService = [];
+                                  
                                    //$rootScope.i = 0;
                                    //$scope.i = 0;
+                                   $scope.panelValue = [];
+                                   $scope.panelService = [];
+                                   $scope.panelVal = [];
+
                                    if (services.length > 0) {
                                        angular.forEach(services, function (service, key) {
 
@@ -379,12 +393,31 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                     $scope.status = 'Unable to load place data: ' + error.message;
                 };
         }
+
+        //$('#btnServicePrompt').balloon({
+        //    html: true,
+        //    position: "top", contents: "<div class='oval-thought'><h4><strong>Would you like to add <br/>a service or product to the company?</strong></h4></div>",
+        //    css: {
+        //        color: "white",
+        //        backgroundColor: "transparent",
+        //        paddingTop: "35px",
+        //        paddingBottom: "35px",
+        //        paddingRight: "30px",
+        //        paddingLeft: "30px",
+        //        top: "100px",
+        //        boxShadow: "none",
+        //        border: "none",
+        //        zIndex: "32767",
+        //        textAlign: "left"
+        //    }, tipSize: 0, minLifetime: 10000, showDuration: 1500, hideDuration: 1000,
+        //}).delay(5000);
     };
 
     $scope.companyReviveClick = function () {
         if ($('#md-form-input').css('display', 'none')) {
             $('#md-form-input').hide();
         }
+        $('#serviceShowUp2').hide();
                 
         $("#serviceOrCompanyName").empty();
         var result = $scope.companyRevivesGoogle;
@@ -575,34 +608,49 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
         angular.forEach(services, function (service, key) {
             if (service.Name == serveNameEach) {
-                
-                $scope.last_value_service = service.serviceRating;
+                var rateYoValue = 0;
+                if (service.serviceRating != null) {
+                    var rateYoValue = service.serviceRating;
+                } else {
+                    rateYoValue = 0;
+                }
                 //var inputStars = '<div class="col-sm-6" style="height:40px;"><div class="col-sm-12" id="rateYoDemoView"></div></div>';
                 
                
                 
                 
                 //$compile(inputStars)($scope);
-                var element1 = $("#serviceShowUp").prepend('<div class="col-sm-4" style="height:40px;text-align:center;">' + service.Name + '</div>');
+                var element1 = $("#serviceShowUp").prepend('<div class="col-sm-4" style="height:40px;">' + service.Name + '</div>');
                 
-                $("#serviceShowUp").show();
-                $('#rateYoDemoView').rateYo({
-                    rating: $scope.last_value_service,
-                    starWidth: "25px",
-                    ratedFill: "green",
-                    precision: 2
-                    //onSet: function (rating, rateYoInstance) {
+                
+                $scope.$watch(function () {
+                    $("#rateYoDemoView").rateYo({
+                        rating: rateYoValue,
+                        starWidth: "25px",
+                        ratedFill: "yellow",
+                        precision: 2,
+                        onSet: function (rating, rateYoInstance) {
 
-                    //    $scope.rateYoDemo = rating;
-                    //}
-                });
+                            $scope.rateYoDemoService = rating;
+                        },
+                        onInit: function (rating, rateYoInstance) {
+
+                            console.log("RateYo initialized! with " + rating);
+                        }
+                    })
+                },
+                        function (newValue, oldValue, $scope) {
+                            //$("#rateYoDemoService" + name).rateYo({ rating:newValue });
+                        });
+                $("#serviceShowUp").show();
+                $("#serviceShowUp2").show();
 
                 
                 //$("#companyName").append(' >> ' + company.Name + ' >> ');
                 $("#serviceOrCompanyName").empty();
                 //$("#serviceOrCompanyName").append("of ");
 
-                $("#serviceOrCompanyName").append(' >> ' + service.Name);
+                $("#serviceOrCompanyName").append(' > ' + service.Name);
                 
                 $('#animatedDivServices').empty();
 
@@ -825,43 +873,43 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
                 //$rootScope.i++;
 
-                var PlaceID = company.PlaceId;
+                //var PlaceID = company.PlaceId;
 
-                var reviews = [];
-                var CommentsArray = [];
-                var Rating = parseFloat(company.Rating);
-                var userRating = '';
-                //alert(score);
+                //var reviews = [];
+                //var CommentsArray = [];
+                //var Rating = parseFloat(company.Rating);
+                //var userRating = '';
+                ////alert(score);
 
-                var Name = company.Name;
-                var Address = company.formatted_address;
+                //var Name = company.Name;
+                //var Address = company.formatted_address;
                 
 
                 //var serviceComments = company.Services;
 
                 //serviceComments.push($scope.userComment);
 
-                var Product = function Product() {
-                    this.Id = 1;
-                    this.Name = "KFC";
-                    this.Rating = 4.3;
-                    this.Comments = ["hgtyftyfyft", "hgddjfghgf"];
-                };
-                var Product = new Product();
-                var Products = [];
-                Products.push(Product);
+                //var Product = function Product() {
+                //    this.Id = 1;
+                //    this.Name = "KFC";
+                //    this.Rating = 4.3;
+                //    this.Comments = ["hgtyftyfyft", "hgddjfghgf"];
+                //};
+                //var Product = new Product();
+                //var Products = [];
+                //Products.push(Product);
 
                 var Service = function Service() {
                     //this.Id = 1;
                     //this.Name = "KFC";
                     this.Type = "";
                     this.Description = "";
-                    //this.serviceRating = [];
+                    this.serviceRating = [];
                     this.serviceComments = [];
                     this.Name = $scope.serviceName;
-                    this.serviceRating = [];
+                    //this.serviceRating = [];
                     //this.serviceRating = company.Services;
-                    this.serviceRating.push($scope.last_value);
+                    this.serviceRating.push($scope.rateYoDemoBoot);
                     this.serviceComments.push($scope.userComment);
                 };
 
@@ -869,11 +917,11 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                 var Services = company.Services;
                 Services.push(Service);
 
-                company = {
-                    "PlaceId": PlaceID, "Name": Name, "Rating": Rating, "Comments": ["", "", "", "", ""], "UsersComments": [5], "Department": null, "Products": Products, "Services": Services
-                };
+                //company = {
+                //    "PlaceId": PlaceID, "Name": Name, "Rating": Rating, "Comments": ["", "", "", "", ""], "UsersComments": [5], "Department": null, "Products": Products, "Services": Services
+                //};
 
-                $rootScope.company = company;
+                //$rootScope.company = company;
 
 
 
@@ -886,6 +934,7 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
                             var services = data.Services;
 
                             $scope.services = services;
+
                             var keyIterate = 0;
                             var serviceIterateNew = '';
 
@@ -902,13 +951,15 @@ function ($scope, $compile, dataFactory, $http, $rootScope, $element, $q, $uibMo
 
                             });
 
+                            $rootScope.i = services.length - 1;
+
                             //$rootScope.i = 0;
                             //var panelIterator = 
                             //serviceIterate = services[length - 1];
 
                             $scope.panelValue.push($rootScope.i);
                             //$scope.panelVal = $scope.panelValue[$rootScope.i];
-                            $scope.panelService.push(serviceIterateNew);
+                            $scope.panelService.push(services[$rootScope.i]);
                             var newDirective = angular.element('<div class="row"><div service-product ng-controller="myController" class="col-md-12" style="float:left;"></div></div>');
                             var element = $("#serviceCollection").prepend(newDirective);
                             $compile(newDirective)($scope);
