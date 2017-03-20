@@ -33,7 +33,7 @@
                     $element.append(template);
                     $scope.$eval($attrs.modalDirective);
                 //$scope.$apply(function () {
-                    $scope.searchMap = angular.element('#pac-input').val();
+                    //$scope.searchMap = angular.element('#pac-input').val();
                         //$scope.$eval($scope.searchMap);
                     //});
                     //$scope.$watch('searchMap', function (tmpStr) {
@@ -42,6 +42,7 @@
                     //$scope.$eval($attrs.searchMap);
                     
                     $compile(template)($scope);
+
                 //}, function (reason) {
                 //    $element.text("Fail (" + reason + ")");
                 //    console.log("Failed promise.");
@@ -73,9 +74,9 @@
             //require: '^^ngModel',
             //template: '<div class="col-md-6"><div class="panel panel-success"><div class="panel-heading" role="tab" id="headingOne"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Service/Product Title</a></h4></div><div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"><div class="panel-body" id="commentPublish"><p class="col-md-5 service-details"></p><span class="col-md-7 serviceRating" ng-model="serviceRating" style="float:right;"></span></div></div></div></div>',
             //template: '<ng-include src="getTemplate()"></ng-include>',
-            template: '',
+            //template: '',
             //transclude: 'element',
-            replace: true,
+            //replace: true,
             //transclude: true,
             controller: 'myController',
             link: link

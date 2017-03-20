@@ -11,6 +11,10 @@
   @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
   @import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700);
 
+  
+  
+  
+  
   body {
     background: #fff;
     font-family: 'Lato', sans-serif;
@@ -18,11 +22,24 @@
     font-size: 14px;
     line-height: 22px;
     color: #000;
+    overflow-y:visible!important;
+    padding-right:0px!important;
   }
 
   html {
     height: 100%;
   }
+
+#pac-input {
+        left: 2%!important;
+        width:90%;
+}
+.widthHundred {
+        width:inherit;
+    }
+.serviceandProduct {
+    width:inherit;
+}
 
 
   a{
@@ -176,8 +193,16 @@
   position: relative;
 }
 
+#mainContainer {
+        width: 100%;
+        background-color:white;
+        border-radius:3px 4px;
+        border:0px;
+        
+}
+
 .search{
-  position: absolute;
+  /*position: absolute;*/
   /*top: 20px;*/
   right: 0;
   z-index: 1;
@@ -540,7 +565,7 @@ ul.sub-menu {
 #home-slider .main-slider {
   position: relative;
   height: 450px;
-  padding-right:40px;
+  /*padding-right:40px;*/
   border-top:20px;
   border-color:#04230c;
   
@@ -2742,6 +2767,10 @@ div #commentPublish {
 
 .serviceDetails {
     word-wrap:break-word;
+}
+
+.modal-content{
+    border:none;
 }
 
 

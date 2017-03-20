@@ -33,7 +33,27 @@
 
                 //$scope.$apply(function () {
                    
-                    $compile(template)($scope);
+                $compile(template)($scope);
+
+                $scope.$watch(function () {
+                    $("#rateYoDemoModal").rateYo({
+                        rating: 3.7,
+                        starWidth: "25px",
+                        ratedFill: "#f0ad4e",
+                        precision: 2,
+                        onSet: function (rating, rateYoInstance) {
+
+                            $scope.rateYoDemoService = rating;
+                        },
+                        onInit: function (rating, rateYoInstance) {
+
+                            console.log("RateYo initialized! with " + rating);
+                            }
+                        })
+                    },
+                         function (newValue, oldValue, $scope) {
+                             //$("#rateYoDemoService" + name).rateYo({ rating:newValue });
+               });
                 //});
                     //$scope.$watch('searchMap', function (val) {
                     //    $scope.searchMap = val;

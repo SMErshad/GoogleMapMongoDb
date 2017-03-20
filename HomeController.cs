@@ -34,7 +34,37 @@ namespace GoogleMapMongoDb.Controllers
 
         }
 
-        
+        [HttpPost]
+        public JsonResult CheckCompanyExists([Bind(Prefix = "")][FromBody]string placeID)
+        {
+
+            Company company = new Company();
+            //company.ToBsonDocument();
+
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("mongogoogleplace");
+            var PlaceData = database.GetCollection<Company>("googledatanew");
+
+            
+            var filter = Builders<Company>.Filter.Eq("PlaceId", placeID);
+
+
+            var projection = Builders<Company>.Projection
+                    .Exclude("_id");
+
+            var document = PlaceData.Find(filter).Project(projection).FirstOrDefault();
+
+            if(document != null) {
+                var documentJson = document.ToJson();
+                return Json(documentJson);
+            }
+
+            
+
+            return Json("Company not found.");
+        }
+
+
 
         [HttpPost]
         public JsonResult GoogleComments([Bind(Prefix = "")][FromBody]string PlaceID) {
@@ -255,6 +285,44 @@ namespace GoogleMapMongoDb.Controllers
 
         return Json(documentJson);
 
+        }
+
+
+
+        [HttpPost]
+        public ActionResult GetCompany([Bind(Prefix = "")][FromBody]string placeID)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("mongogoogleplace");
+            var placeData = database.GetCollection<Company>("googledatanew");
+
+            var docJson = "";
+
+            var filter = Builders<Company>.Filter.Eq("PlaceId", placeID);
+
+            Company document = new Company();
+
+            try
+            {
+                document = placeData.Find(filter).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            //finally
+            //{
+            if (document == null)
+            {
+                return Json("NO Company");
+            }
+            else
+            {
+                docJson = document.ToJson(); 
+            }
+
+            return Json(docJson);
+            
         }
 
     }

@@ -1,8 +1,8 @@
 ﻿<div class="row" id="commentPublishPanelDiv{{panelVal[i]}}" style="margin:0px">
     <div id="x" hidden>{{panelVal[i]}}</div>
-    <div class="col-sm-12 panel panel-success" >
+    <div class="col-xs-12 panel panel-success" >
         <div class="row panel-heading" role="tab" id="heading{{panelVal[i]}}" style="background-color:#c9e1c9">
-            <h4 class="col-sm-12 panel-title" style="padding:0px;">
+            <h4 class="col-xs-12 panel-title" style="padding:0px;">
                 <a role="button"  data-toggle="collapse" data-parent="#accordion" href="#collapse{{panelVal[i]}}" aria-expanded="true" aria-controls="collapse{{panelVal[i]}}">
                     {{service.Name}}
                 </a>
@@ -10,33 +10,36 @@
         </div>
         
         <div id="collapse{{panelVal[i]}}" class="row panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{panelVal[i]}}"  style="background-color:#efefef;">
-            <!--<div class="col-sm-12" style="height:10px;"></div>-->
-                    <div class="col-sm-12 panel-body" id="commentPublish" style="padding-left:10px;color:darkgreen;">
+            <!--<div class="col-xs-12" style="height:10px;"></div>-->
+                    <div class="col-xs-12 panel-body" id="commentPublish" style="padding-left:10px;color:darkgreen;">
                 
-                        <div class="row" >
-                            <div class="col-sm-6 serviceDetails" ng-model="serviceDetails" ng-bind-html="serviceDetails" id="service-details"></div>
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div style="float:left;" class="col-sm-8">
+                        <div class="row">
+                            <div class="col-xs-4 serviceDetails" ng-model="serviceDetails" ng-bind-html="serviceDetails" id="service-details" style="float:left;"></div>
+                            <div class="col-xs-8"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4"></div>
+                            <div class="col-xs-8">
+                                <div class="row" style="height:50px;">
+                                    <div style="float:left;padding:0px;margin:0px;" class="col-xs-5">
                                         <div class="row">
-                                            <div class="col-sm-12 serviceRating"  id="serviceRating{{panelVal[i]}}">
-                                                <div class="row">
-                                                    <div class="col-sm-12" id="rateYoDemoService{{service.Name}}"></div>
-                                                </div>
-                                            </div>
+                                            
+                                                    <div class="col-xs-12" id="rateYoDemoService{{service.Name}}"></div>
+                                                
                                         </div>
                                     </div>
-                                    <div class="col-sm-4"><button style="float:right;margin-top:0px;padding-left:0px;padding-right:0px;" id="{{service.Name}}" ng-click="serveComments()">View Details</button>
+                                    <div class="col-xs-3" style="text-align:right;">
+                                        <button class="btn btn-xsall" style="padding: 5px 5px;font-size:small;" id="{{service.Name}}" ng-click="serveComments()">View Details</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     
                     <div class="row">
-                        <div class="col-sm-6"></div>
-                        <div class="col-sm-6"  id="userService{{panelVal[i]}}">
+                        <div class="col-xs-6"></div>
+                        <div class="col-xs-6"  id="userService{{panelVal[i]}}">
                             
-                                <button style="float:right;margin-right:0px;margin-bottom:0px;" class="btn btn-primary" id="openFormOldAll{{panelVal[i]}}" ng-click="openFormOld()"><font color="white"><i style="color:white;" class="fa fa-comment-o"></i>&nbsp;&nbsp;Please Add Comment</font></button>
+                                <button style="float:right;font-size:small;width:29%;padding:5px 2px;" class="btn btn-success btn-xsall" id="openFormOldAll{{panelVal[i]}}" ng-click="openFormOld()"><font color="white">Add Review</font></button>
                             
                         </div>
                     </div>

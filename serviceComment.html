@@ -1,4 +1,4 @@
-﻿<div class="col-md-12" style="height:450px">
+﻿<div class="col-xs-12" style="height:450px">
     <div class="panel panel-success" id="modalpanel">
         <div class="panel-heading" role="tab" id="headingA">
             <h4 class="panel-title">
@@ -10,30 +10,30 @@
         </div>
         <div id="collapseA" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingA">
             <div class="panel-body" id="commentPublishNewCreation">
-                <!--<p class="col-md-5" ng-bind-html="serviceDetails" id="service-details" style="height:80px;"></p>-->
-                <!--<span class="col-md-7 serviceRating" style="height:50px;float:right;"></span>-->
+                <!--<p class="col-xs-5" ng-bind-html="serviceDetails" id="service-details" style="height:80px;"></p>-->
+                <!--<span class="col-xs-7 serviceRating" style="height:50px;float:right;"></span>-->
                 <!--<div style="height:30px;float:right;"><p><a id="openFormNewCreation" ng-href="#commentPublishPanelDiv" ng-click="openFormOld()"><font color="green"><i class="fa fa-comment-o"></i> Add a Comment</font></a></p></div>-->
                <div class="row"> 
-                <div class="col-sm-12" id="formOld{{panelVal}}" style="background-color:#dff0d8;">
+                <div class="col-xs-12" id="formOld{{panelVal}}" style="background-color:#dff0d8;">
                     <form name="userForm">
 
                         <div class="row">
-                            <div class="form-group col-sm-12">
+                            <div class="form-group col-xs-12">
 
                                 <input-stars max="5" icon-full="fa-star" icon-base="fa fa-fw" icon-empty="fa-star-o" ng-model="last_value_user"></input-stars>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-sm-12">
+                            <div class="form-group col-xs-12">
                                 <!-- <label>Add Comment:</label>-->
                                 <textarea type="text" class="form-control" ng-model="userCommentOld" rows="2" placeholder="comment..."></textarea>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-xs-6">
                                 <input type="submit" style="background-color:#c9e1c9" class=" btn form-control" ng-click="ok()" value="Add"/>
                             </div>   
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-xs-6">
                                 <button class="btn btn-warning form-control" ng-click="cancel()">Cancel</button>
                             </div>
                         </div>

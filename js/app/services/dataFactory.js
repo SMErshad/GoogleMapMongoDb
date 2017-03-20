@@ -9,6 +9,21 @@
         //var Name = $rootScope.Name;
         //var placeID = $rootScope.placeID;
 
+        dataFactory.checkCompanyExists = function (placeID) {
+            //var company = $rootScope.company;
+            //var data = $.param({
+            //    company: company
+            //});
+            var http = $http({
+                method: 'POST',
+                url: '../Home/CheckCompanyExists',
+                //traditional: true,
+                data: JSON.stringify(placeID),
+                dataType: "json"
+            });
+            return http;
+        };
+
         dataFactory.getCompany = function (placeID) {
             //var company = $rootScope.company;
             //var data = $.param({

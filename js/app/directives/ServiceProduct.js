@@ -15,25 +15,14 @@ myApp
                         var template = angular.element(html);
                         // Append it to the directive element
                         element.append(template);
-                        //var x = null;
-                        //scope.$apply(function () {
-                        //var x = element[0].querySelector("#x").innerHTML;
-                        //var y = element[0].querySelector(".serviceRating").children[0];
-                        //scope.panelVal = [];
-                        scope.panelVal[i] = scope.panelValue[i];
+                        scope.$eval(scope.panelVal[i] = scope.panelValue[i]);
+                        scope.$eval(scope.service);
+                        var panelval = scope.panelValue[i];
+                        //scope.panelVal[i] = panelval;
                         var x = scope.panelVal[i];
-                        scope.service = scope.panelService[i];
+                        //scope.service = scope.panelService[i];
                         var rateYoDemo = 0;
-                        if (scope.service.serviceRating != null) {
-                            rateYoDemo = scope.service.serviceRating.pop();
-                        }
-                        else {
-                            rateYoDemo = 0;
-                        }
-
-                        i++;
-                        //scope.i = i;
-                        $rootScope.i = i;
+                        
                         
                         $rootScope.serveEdit = scope.service.Name;
                         scope.serveEditEach = scope.service.Name;
@@ -43,20 +32,39 @@ myApp
                
                         //$("#service-details").append('<strong>Service/Product:</strong> ' + scope.service.Name + '<br>' + '<i class="fa fa-commenting"></i> ' + scope.service.serviceComments + '</br></br>');
                         scope.serviceDetails = '<i class="fa fa-commenting"></i> ' + scope.service.serviceComments + '</br></br>';
-                        $("#rateYoDemoService" + name).rateYo({
-                            rating: rateYoDemo,
-                            starWidth: "25px",
-                            ratedFill: "yellow",
-                            precision: 2,
-                            onSet: function (rating, rateYoInstance) {
 
-                                scope.rateYoDemoService = rating;
-                            },
-                            onInit: function (rating, rateYoInstance) {
 
-                                console.log("RateYo initialized! with " + rating);
-                            }
-                        });
+                        if (typeof scope.service.serviceRating !== 'undefined' && scope.service.serviceRating !== null) {
+                            rateYoDemo = scope.service.serviceRating.pop();
+                        }
+                        else if (typeof scope.service.serviceRating == 'undefined') {
+                            rateYoDemo = 0;
+                        }
+
+                        i++;
+                        //scope.i = i;
+                        $rootScope.i = i;
+                        
+                        scope.$watch(function () {
+                            $("#rateYoDemoService" + name).rateYo({
+                                rating: rateYoDemo,
+                                starWidth: "25px",
+                                ratedFill: "#f0ad4e",
+                                precision: 2,
+                                onSet: function (rating, rateYoInstance) {
+                                    
+                                    scope.rateYoDemoService = rating;
+                                    },
+                                 onInit: function (rating, rateYoInstance) {
+                                     scope.rateYoDemoServiceInit = rating;
+                                    console.log("RateYo initialized! with " + rating);
+                                     }
+                                })
+                        },
+                        function (newValue, oldValue, scope) {
+                            //$("#rateYoDemoService" + name).rateYo({ rating:newValue });
+                        }); 
+
                        
                         
                         $compile(template)(scope);

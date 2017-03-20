@@ -1,0 +1,38 @@
+﻿<div id="serviceFormPanel" class="panel" style="">
+    <div id="servicePanelHead" class="row panel-heading" style="background-color:#c9e1c9;color:darkgreen;margin-left:0px;margin-right:0px;"><a href="#" style="text-decoration:none;color:darkgreen;">Add New Services/Products</a><span ng-click="cancel()" style="float:right"><strong>x</strong></span></div>
+    <div class="panel-body" style="">
+        <form ng-submit="submitOne()" style="align-content:center;">
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <label>Service/Product Name</label>
+                    <input type="text" name="name" class="form-control" ng-model="serviceName" required />
+                     </div>
+            </div>
+           <div class=" row form-group">
+                <div class="col-xs-12">
+                    <label>Rating</label>
+                    <div class="row">
+                        <div class="col-xs-12" id="rateYoDemoBoot" style="margin-top:20px;margin-bottom:20px;"></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <label>Comment</label>
+                    <textarea type="text" class="form-control" ng-model="userComment"></textarea>
+                </div>
+            </div>
+            <div class=" row form-group" style="margin-top:40px;">
+                <div class="form-group col-xs-6">
+                    <button style="background-color:#c9e1c9;color:darkgreen;" class="btn  form-control" ng-click="cancel()"><strong>Cancel</strong></button>
+
+                </div>
+                <div class="form-group col-xs-6">
+                    <input type="submit" class=" btn btn-warning form-control" style="" value="Add" ng-click="submitOne()" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

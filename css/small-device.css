@@ -1,0 +1,292 @@
+﻿body {
+}
+
+@media only screen and (max-width: 480px) {
+      #header {
+			/*background-image: url(media-queries-phone.jpg);*/
+			height: 93px;
+			position: relative;
+		}
+      #header h1 {
+			font-size: 140%;
+		}
+ #incept, #follow, #gplace, #mainContainer {
+		float: none;
+		width: auto;
+	}
+   .widthHundred {
+        width:100%;
+    }
+    .serviceandProduct {
+        width: 100%;
+         }
+
+	}
+  
+
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-width : 320px) 
+and (max-width : 480px) {
+#incept, #follow, #gplace, #mainContainer {
+		float: none;
+		width: auto;
+	}
+.widthHundred {
+        width:100%;
+    }
+.serviceandProduct {
+        width: 100%;
+         }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen 
+and (min-width : 321px)
+and (max-width : 480px) {
+#incept, #follow, #gplace, #mainContainer {
+		float: none;
+		width: auto;
+	}
+.widthHundred {
+        width:100%;
+    }
+.serviceandProduct {
+        width: 100%;
+         }
+#pac-input {
+        left: 2%!important;
+        width:90%;
+}
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+#incept, #follow, #gplace, #mainContainer {
+		float: none;
+		width: auto;
+	}
+.widthHundred {
+        width:100%;
+    }
+.serviceandProduct {
+        width: 100%;
+         }
+#pac-input {
+        left: 2%!important;
+        width:90%;
+}
+}
+@media only screen 
+and (min-width : 481px) 
+and (max-width : 650px) {
+    #incept, #follow, #gplace, #mainContainer {
+		float: none;
+		width: auto;
+	}
+    .widthHundred {
+        width:100%;
+    } 
+    .serviceandProduct {
+        width: 100%;
+         }
+#pac-input {
+        left: 2%!important;
+        width:90%;
+}
+#companyNameForService {
+        font-size:11px!important;
+    }
+}
+@media only screen 
+and (min-width : 651px) 
+and (max-width : 800px) {
+    /*#incept, #follow, #gplace, #mainContainer {
+		float: none;
+		width: auto;
+	}*/
+    .widthHundred {
+        width:100%;
+    } 
+    .serviceandProduct {
+        width: 100%;
+         }
+#pac-input {
+        left: 2%!important;
+        width:90%;
+}
+#companyNameForService {
+        font-size:10px!important;
+    }
+}
+
+@media only screen and (min-width : 651px) and (max-width : 720px) {
+    #map {
+            margin-top: 13%!important;
+    }
+    #companyNameForService {
+        font-size:12px!important;
+    }
+}
+@media only screen and (min-width : 721px) and (max-width : 780px) {
+    #map {
+            margin-top: 12%!important;
+    }
+    #companyNameForService {
+        font-size:10px!important;
+    }
+}
+@media only screen and (min-width : 428px) and (max-width : 640px) {
+    #map {
+            margin-top: 12%!important;
+    }
+    #companyNameForService {
+        font-size:10px!important;
+    }
+}
+@media only screen and (max-width : 426px) and (min-width : 320px){
+    #map {
+            margin-top: 9%!important;
+    }
+    #companyNameForService {
+        width:83%!important;
+        font-size:9px!important;
+    }
+   
+}
+
+@media only screen and (max-width : 319px) and (min-width : 200px){
+    #map {
+            margin-top: 9%!important;
+    }
+    #companyNameForService {
+        width:70%!important;
+        font-size:9px!important;
+    }
+}
+@media only screen and (max-width : 199px) and (min-width : 100px){
+    #map {
+            margin-top: 9%!important;
+    }
+    #companyNameForService {
+        width:40%!important;
+    }
+           
+    #companyNameForService {
+        font-size:8px!important;
+    }
+}
+
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen 
+and (min-width : 768px) 
+and (max-width : 1024px) {
+.widthHundred {
+        width:100%;
+    } 
+    .serviceandProduct {
+        width: 100%;
+         }
+#pac-input {
+        left: 2%!important;
+        width:90%;
+}
+
+}
+
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-width : 768px) 
+and (max-width : 1024px) 
+and (orientation : landscape) {
+.widthHundred {
+        width:100%;
+    } 
+.serviceandProduct {
+        width: 100%;
+         }
+
+}
+
+@media only screen 
+and (min-width : 768px) 
+and (max-width : 980px) 
+ {
+
+    #companyNameForService {
+        font-size:13px!important;
+    }
+}
+
+/* iPads (portrait) ----------- */
+@media only screen 
+and (min-width : 768px) 
+and (max-width : 1152px) 
+and (orientation : portrait) {
+    .widthHundred {
+        width:100%;
+    } 
+
+    .serviceandProduct {
+        width: 100%;
+         }
+#pac-input {
+        left: 2%!important;
+        width:90%;
+}
+#companyNameForService {
+        font-size:14px!important;
+    }
+    
+}
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 1224px) {
+/*#incept, #follow, #gplace, #mainContainer {
+		float: none;
+		width: auto;
+	}*/
+.widthHundred {
+        width:100%;
+    } 
+    .serviceandProduct {
+        width: 100%;
+         }
+}
+
+/* Large screens ----------- */
+@media only screen 
+and (min-width : 1824px) {
+/*#incept, #follow, #gplace, #mainContainer {
+		float: none;
+		width: auto;
+	}*/
+.widthHundred {
+        width:100%;
+    } 
+    .serviceandProduct {
+        width: 100%;
+         }
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-pixel-ratio : 1.5),
+only screen and (min-pixel-ratio : 1.5) {
+#incept, #follow, #gplace, #mainContainer {
+		float: none;
+		width: auto;
+	}
+.widthHundred {
+        width:100%;
+    }
+.serviceandProduct {
+        width: 100%;
+         }
+}

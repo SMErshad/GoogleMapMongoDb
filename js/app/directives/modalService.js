@@ -28,17 +28,44 @@
                 $scope.$eval($attrs.modalService);
                 $scope.$eval($attrs.inputStars);
                 $compile(template)($scope);
+                //$scope.$watch(function () {
+                //    $('#rateYoDemo').rateYo({
+                //        rating: $scope.rateYoDemoServiceInit,
+                //        starWidth: "25px",
+                //        ratedFill: "#f0ad4e",
+                //        precision: 2,
+                //        onSet: function (rating, rateYoInstance) {
 
-                $('#rateYoDemo').rateYo({
-                    rating: 3.6,
-                    starWidth: "25px",
-                    ratedFill: "green",
-                    precision: 2,
-                    onSet: function (rating, rateYoInstance) {
-
-                        $scope.rateYoDemo = rating;
-                    }
-                });
+                //            $scope.rateYoDemo = rating;
+                //        },
+                //        onInit: function (rating, rateYoInstance) {
+                //            $scope.rateYoDemoInit = rating;
+                //            console.log("RateYo initialized! with " + rating);
+                //        }
+                //    });
+                //},
+                //        function (newValue, oldValue, scope) {
+                //            //$("#rateYoDemoService" + name).rateYo({ rating:newValue });
+                //        });
+                //scope.$watch(function () {
+                //            $("#rateYoDemoService" + name).rateYo({
+                //                rating: rateYoDemo,
+                //                starWidth: "25px",
+                //                ratedFill: "#f0ad4e",
+                //                precision: 2,
+                //                onSet: function (rating, rateYoInstance) {
+                                    
+                //                    scope.rateYoDemoService = rating;
+                //                    },
+                //                 onInit: function (rating, rateYoInstance) {
+                //                     scope.rateYoDemoServiceInit = rating;
+                //                    console.log("RateYo initialized! with " + rating);
+                //                     }
+                //                })
+                //        },
+                //        function (newValue, oldValue, scope) {
+                //            //$("#rateYoDemoService" + name).rateYo({ rating:newValue });
+                //        });
 
                 //$scope.$watch(function () {
                 //    return $scope.last_value_user_modal;
